@@ -10,6 +10,7 @@ global_ipv6_enabled: true
 global_ipv6_subnet_ranges:
   hetzner: "64"
   digitalocean: "124"
+  ovh: "64"
 
 ######################################################
 ##
