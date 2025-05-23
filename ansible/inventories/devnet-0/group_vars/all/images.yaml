@@ -27,7 +27,6 @@ default_tooling_images:
   forky: docker.ethquokkaops.io/dh/ethpandaops/forky:latest
   fauceth: docker.ethquokkaops.io/dh/skylenet/fauceth:fix_fee_estimation
   powfaucet: docker.ethquokkaops.io/dh/pk910/powfaucet:v2-stable
-  ethstats: docker.ethquokkaops.io/dh/skylenet/ethstats-server:poa-no-geoip
   homepage: docker.ethquokkaops.io/dh/ethpandaops/ethereum-testnet-homepage:latest
   checkpointz: docker.ethquokkaops.io/dh/ethpandaops/checkpointz:latest
   blockscout: docker.ethquokkaops.io/dh/blockscout/blockscout:latest
