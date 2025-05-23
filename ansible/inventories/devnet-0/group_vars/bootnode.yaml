@@ -47,8 +47,7 @@ geth_container_command_extra_args:
   - --http.vhosts=*
   - --networkid={{ ethereum_network_id }}
   - --syncmode=full
-  - --gcmode=archive
-  - --state.scheme=hash
+  - --state.scheme=path
 geth_init_custom_network: true
 geth_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
 geth_container_pull: true
@@ -56,7 +55,7 @@ geth_container_pull: true
 geth_init_custom_network_container_command:
   - --datadir=/data
   - init
-  - --state.scheme=hash
+  - --state.scheme=path
   - /genesis.json
 
 # role: ethpandaops.general.prometheus
