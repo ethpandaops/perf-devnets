@@ -133,7 +133,7 @@ for arg in "${command[@]}"; do
       # Get a specific block of the network
       if [[ -z "${command[2]}" ]]; then
         echo "Please provide a address as the second argument"
-        echo "  Example: ${0} get_balance 0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+        echo "  Example: ${0} get_balance 0x86cF016FB873D50a7B8F31EB154c9234DD31b058"
         exit;
       elif [[ (${#command[2]} == 42) && (${command[2]} == 0x*) ]]; then
         balance=$(curl -s  --header 'Content-Type: application/json' --data-raw '{"jsonrpc":"2.0","method":"eth_getBalance", "params":["'${command[2]}'","latest"], "id":0}' $rpc_endpoint | jq -r '.result' | python -c "import sys; print(int(sys.stdin.read(), 16) / 1e18)")
@@ -141,7 +141,7 @@ for arg in "${command[@]}"; do
         exit;
       else
         echo "You did not provide a valid address as the second argument"
-        echo "  Example: ${0} get_balance 0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+        echo "  Example: ${0} get_balance 0x86cF016FB873D50a7B8F31EB154c9234DD31b058"
         exit;
       fi
       ;;
@@ -432,7 +432,7 @@ for arg in "${command[@]}"; do
       if [[ $# -ne 4 ]]; then
         echo "setting  calls for exactly 3 arguments!"
         echo "  Usage: ${0} set_withdrawal_addr startIndex endIndex address"
-        echo "  Example: ${0} set_withdrawal_addr 0 10 0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
+        echo "  Example: ${0} set_withdrawal_addr 0 10 0x86cF016FB873D50a7B8F31EB154c9234DD31b058"
         exit;
       else
         echo "Setting withdrawal credentials for validators ${command[2]} to ${command[3]} to address ${command[4]}"

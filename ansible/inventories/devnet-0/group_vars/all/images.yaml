@@ -8,11 +8,11 @@ default_ethereum_client_images:
   teku: docker.ethquokkaops.io/dh/consensys/teku:latest
   grandine: docker.ethquokkaops.io/dh/ethpandaops/grandine:develop
 ### Execution layer clients
-  besu: docker.ethquokkaops.io/dh/hyperledger/besu:latest
-  geth: docker.ethquokkaops.io/dh/ethereum/client-go:stable
-  erigon: docker.ethquokkaops.io/dh/erigontech/erigon:main-latest
+  besu: docker.ethquokkaops.io/dh/ethpandaops/besu:develop
+  geth: docker.ethquokkaops.io/dh/ethpandaops/geth:master
+  erigon: docker.ethquokkaops.io/dh/ethpandaops/erigon:main
   ethereumjs: docker.ethquokkaops.io/dh/ethpandaops/ethereumjs:master
-  nethermind: docker.ethquokkaops.io/dh/nethermindeth/nethermind:master
+  nethermind: docker.ethquokkaops.io/dh/ethpandaops/nethermind:master
   reth: docker.ethquokkaops.io/dh/ethpandaops/reth:main
 
 
@@ -38,7 +38,7 @@ default_tooling_images:
   blobscan_indexer: docker.ethquokkaops.io/dh/blossomlabs/blobscan-indexer:latest
   dora: docker.ethquokkaops.io/dh/ethpandaops/dora:master-latest
   dugtrio: docker.ethquokkaops.io/dh/ethpandaops/dugtrio:latest
-  ethereum_genesis_generator: docker.ethquokkaops.io/dh/ethpandaops/ethereum-genesis-generator:3.7.0
+  ethereum_genesis_generator: docker.ethquokkaops.io/dh/ethpandaops/ethereum-genesis-generator:4.0.7
   tracoor: docker.ethquokkaops.io/dh/ethpandaops/tracoor:0.0.26-debian
   ncli: docker.ethquokkaops.io/dh/status-im/nimbus-eth2:unstable
   lcli: docker.ethquokkaops.io/dh/ethpandaops/lighthouse:unstable-a94b12blo
