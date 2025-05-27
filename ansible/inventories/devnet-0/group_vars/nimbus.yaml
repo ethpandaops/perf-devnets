@@ -46,6 +46,7 @@ nimbus_container_command_extra_simple_args:
   - --log-level=INFO
   - --light-client-data-serve=false
   - --graffiti={{ ansible_hostname }}
+  - --dump
 nimbus_container_command_extra_bootnode_args: >-
   {{ ethereum_cl_bootnodes | map('regex_replace', '^', '--bootstrap-node=') | list }}
 

@@ -54,6 +54,8 @@ prysm_container_command_extra_simple_args:
   - --enable-debug-rpc-endpoints
   - --verbosity=debug
   - --subscribe-all-subnets
+  - --save-invalid-block-temp
+  - --save-invalid-blob-temp
 prysm_container_command_extra_bootnode_args: >-
   {{ ethereum_cl_bootnodes | map('regex_replace', '^', '--bootstrap-node=') | list }}
 
