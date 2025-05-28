@@ -21,7 +21,6 @@ geth_container_command_extra_args:
   - --networkid={{ ethereum_network_id }}
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --syncmode=full
-  - --override.prague={{ prague_fork_timestamp }}
 geth_init_custom_network: false
 geth_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
 geth_init_custom_network_container_command:
