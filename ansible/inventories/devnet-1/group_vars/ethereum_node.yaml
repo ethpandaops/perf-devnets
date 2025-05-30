@@ -68,3 +68,50 @@ prometheus_config: |
         - targets: ["{{ vars[ethereum_node_cl + '_container_name'] }}:{{ ethereum_node_cl_ports_metrics }}"]
           labels:
             instance: "{{ inventory_hostname }}"
+
+ethereum_node_docker_watchtower_enabled: true
+ethereum_node_docker_watchtower_containers_list:
+  - execution
+  - beacon
+  - validator
+
+ethereum_node_grafana_alloy_enabled: true
+alloy_pyroscope_server_endpoint: "{{ secret_pyroscope.endpoint }}"
+alloy_pyroscope_server_user: "{{ secret_pyroscope.username }}"
+alloy_pyroscope_server_password: "{{ secret_pyroscope.password }}"
+ethereum_node_grafana_alloy_config_content: |
+  discovery.docker "local_containers" {
+    host = "unix:///var/run/docker.sock"
+
+    filter {
+      name = "name"
+      values = [
+        "execution",
+        "beacon",
+        "validator",
+      ]
+    }
+  }
+
+  pyroscope.ebpf "instance" {
+    forward_to = [pyroscope.write.endpoint.receiver]
+    targets = discovery.docker.local_containers.targets
+  }
+
+  pyroscope.write "endpoint" {
+    endpoint {
+      basic_auth {
+        password = "{{ alloy_pyroscope_server_password }}"
+        username = "{{ alloy_pyroscope_server_user }}"
+      }
+      url = "{{ alloy_pyroscope_server_endpoint }}"
+    }
+    external_labels = {
+      "instance" = "{{ inventory_hostname }}"
+      "ip_address" = "{{ ansible_host }}"
+      "network" = "{{ ethereum_network_name }}"
+      "testnet" = "{{ ethereum_network_name }}"
+      "execution_client" = "{{ ethereum_node_el }}"
+      "consensus_client" = "{{ ethereum_node_cl }}"
+    }
+  }
