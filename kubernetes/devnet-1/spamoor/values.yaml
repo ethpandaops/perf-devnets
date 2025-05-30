@@ -1,0 +1,38 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/spamoor.yaml.j2
+
+spamoor:
+  fullnameOverride: spamoor
+  image:
+    repository: docker.ethquokkaops.io/dh/ethpandaops/spamoor
+    tag: latest
+    pullPolicy: Always
+  resources:
+    requests:
+      cpu: 250m
+      memory: 500Mi
+    limits:
+      cpu: 2000m
+      memory: 2Gi
+  ingress:
+    enabled: true
+    className: ingress-nginx-public
+    hosts:
+      - host: spamoor.perf-devnet-1.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+
+
+  persistence:
+    enabled: true
+
+  privateKey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.spamoor_private_key}>"
+  rpcEndpoints:
+  # Rpc
+  - "http://geth-teku-001:8545"
+  - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.bootnode-1.perf-devnet-1.ethpandaops.io"
+  - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-nethermind-1.perf-devnet-1.ethpandaops.io"
+  - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-reth-1.perf-devnet-1.ethpandaops.io"
+  - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.nimbus-besu-1.perf-devnet-1.ethpandaops.io"
+  - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.prysm-geth-1.perf-devnet-1.ethpandaops.io"
+  - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.teku-erigon-1.perf-devnet-1.ethpandaops.io"
