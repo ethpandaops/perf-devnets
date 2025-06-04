@@ -1,5 +1,5 @@
 default_ethereum_client_images:
-### Consensus layer clients
+  ### Consensus layer clients
   lighthouse: docker.ethquokkaops.io/dh/sigp/lighthouse:latest
   lodestar: docker.ethquokkaops.io/dh/chainsafe/lodestar:latest
   nimbus: docker.ethquokkaops.io/dh/statusim/nimbus-eth2:multiarch-latest
@@ -7,14 +7,13 @@ default_ethereum_client_images:
   prysm_validator: docker.ethquokkaops.io/gcr/prysmaticlabs/prysm/validator:latest
   teku: docker.ethquokkaops.io/dh/consensys/teku:latest
   grandine: docker.ethquokkaops.io/dh/ethpandaops/grandine:develop
-### Execution layer clients
-  besu: docker.ethquokkaops.io/dh/ethpandaops/besu:main
-  geth: docker.ethquokkaops.io/dh/ethpandaops/geth:master
-  erigon: docker.ethquokkaops.io/dh/ethpandaops/erigon:main
-  ethereumjs: docker.ethquokkaops.io/dh/ethpandaops/ethereumjs:master
-  nethermind: docker.ethquokkaops.io/dh/ethpandaops/nethermind:master
-  reth: docker.ethquokkaops.io/dh/ethpandaops/reth:main
-
+  ### Execution layer clients
+  besu: docker.ethquokkaops.io/dh/ethpandaops/besu:performance
+  geth: docker.ethquokkaops.io/dh/ethpandaops/geth:performance
+  erigon: docker.ethquokkaops.io/dh/ethpandaops/erigon:performance
+  ethereumjs: docker.ethquokkaops.io/dh/ethpandaops/ethereumjs:performance
+  nethermind: docker.ethquokkaops.io/dh/ethpandaops/nethermind:performance
+  reth: docker.ethquokkaops.io/dh/ethpandaops/reth:performance
 
 default_tooling_images:
   mev_boost: docker.ethquokkaops.io/dh/ethpandaops/mev-boost:latest
@@ -52,4 +51,4 @@ default_tooling_images:
   nginx_proxy_gen: docker.ethquokkaops.io/dh/nginxproxy/docker-gen
   nginx_proxy_acme: docker.ethquokkaops.io/dh/nginxproxy/acme-companion
   vector: docker.ethquokkaops.io/dh/timberio/vector:0.46.1-alpine
-  spamoor: docker.ethquokkaops.io/dh/ethpandaops/spamoor:latest
+  spamoor: docker.ethquokkaops.io/dh/ethpandaops/spamoor:master-latest
