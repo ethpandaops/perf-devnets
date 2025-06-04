@@ -68,6 +68,25 @@ prometheus_config: |
         - targets: ["{{ vars[ethereum_node_cl + '_container_name'] }}:{{ ethereum_node_cl_ports_metrics }}"]
           labels:
             instance: "{{ inventory_hostname }}"
+    - job_name: "snooper"
+      scrape_interval: "1s"
+      static_configs:
+        - targets:
+            - "snooper-rpc:9090"
+            - "snooper-engine:9090"
+          labels:
+            instance: "{{ inventory_hostname }}"
+
+# use snooper with prometheus metrics
+json_rpc_snooper_container_image: ghcr.io/nethermindeth/jrpc-interceptor:pr-5
+json_rpc_snooper_container_env:
+  LISTEN_PORT: "0.0.0.0:{{ json_rpc_snooper_port }}"
+  SERVICE_TO_PROXY: "{{ json_rpc_snooper_target }}"
+  LOG_SERVER_URL: "0.0.0.0:514"
+  USE_PROMETHEUS: "true"
+  PROMETHEUS_URL: "0.0.0.0:9090"
+  SERVER_NAME: "{{ inventory_hostname }}"
+json_rpc_snooper_container_command: []
 
 ethereum_node_docker_watchtower_enabled: true
 ethereum_node_docker_watchtower_containers_list:
