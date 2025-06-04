@@ -107,11 +107,11 @@ ethereum_node_grafana_alloy_config_content: |
       url = "{{ alloy_pyroscope_server_endpoint }}"
     }
     external_labels = {
-      "instance" = "{{ inventory_hostname }}"
-      "ip_address" = "{{ ansible_host }}"
-      "network" = "{{ ethereum_network_name }}"
-      "testnet" = "{{ ethereum_network_name }}"
-      "execution_client" = "{{ ethereum_node_el }}"
-      "consensus_client" = "{{ ethereum_node_cl }}"
+      "instance" = "{{ inventory_hostname }}",
+      "ip_address" = "{{ ansible_host }}",
+      "network" = "{{ ethereum_network_name }}",
+      "testnet" = "{{ ethereum_network_name }}",
+      "execution_client" = "{{ ethereum_node_el }}",
+      "consensus_client" = "{{ ethereum_node_cl }}",
     }
   }
