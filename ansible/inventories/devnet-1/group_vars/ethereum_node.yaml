@@ -81,7 +81,7 @@ prometheus_config: |
 json_rpc_snooper_container_image: ghcr.io/nethermindeth/jrpc-interceptor:pr-5
 json_rpc_snooper_container_env:
   LISTEN_PORT: "0.0.0.0:{{ json_rpc_snooper_port }}"
-  SERVICE_TO_PROXY: "{{ json_rpc_snooper_target }}"
+  SERVICE_TO_PROXY: "{{ json_rpc_snooper_target | regex_replace('^https?://', '') }}"
   LOG_SERVER_URL: "0.0.0.0:514"
   USE_PROMETHEUS: "true"
   PROMETHEUS_URL: "0.0.0.0:9090"
