@@ -24,6 +24,8 @@ erigon_container_command_extra_args:
   - --externalcl
   - --no-downloader
   - --miner.gaslimit=100000000
+  - --txpool.globalqueue=10000
+  - --txpool.globalslots=10000
 erigon_init_custom_network: true
 erigon_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
 
