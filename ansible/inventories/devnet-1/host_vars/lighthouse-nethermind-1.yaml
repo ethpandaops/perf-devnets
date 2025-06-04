@@ -1,0 +1,13 @@
+
+lighthouse_validator_container_command:
+  - lighthouse
+  - validator_client
+  - --validators-dir=/validator-data/keys
+  - --secrets-dir=/validator-data/secrets
+  - --beacon-nodes=https://eth:prAP7jyLJoHzbCa@bn.bootnode-1.perf-devnet-1.ethpandaops.io
+  - --init-slashing-protection
+  - --suggested-fee-recipient={{ lighthouse_validator_fee_recipient }}
+  - --metrics
+  - --metrics-address=0.0.0.0
+  - --metrics-allow-origin=*
+  - --metrics-port={{ lighthouse_ports_metrics }}
