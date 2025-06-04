@@ -25,6 +25,7 @@ reth_container_command_extra_args:
   - --http.api=trace,rpc,eth,net,debug,web3,admin
   - --full
   - --builder.gaslimit=100000000
+  - --txpool.queued-max-count=10000
 prometheus_config: |
   global:
     scrape_interval: 30s
