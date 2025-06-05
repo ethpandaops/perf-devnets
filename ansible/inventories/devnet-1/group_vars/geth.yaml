@@ -85,3 +85,11 @@ prometheus_config: |
         - targets: ["execution:{{ ethereum_node_el_ports_metrics }}"]
           labels:
             instance: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
+    - job_name: "snooper"
+      scrape_interval: "1s"
+      static_configs:
+        - targets:
+            - "snooper-rpc:9090"
+            - "snooper-engine:9090"
+          labels:
+            instance: "{{ inventory_hostname }}"
