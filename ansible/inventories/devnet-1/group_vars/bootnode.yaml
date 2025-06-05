@@ -68,7 +68,7 @@ prometheus_config: |
     evaluation_interval: 30s
     scrape_timeout: 10s
     external_labels:
-      instance: "{{ inventory_hostname }}"
+      instance: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
       ip_address: "{{ ansible_host }}"
       network: "{{ ethereum_network_name }}"
       testnet: "{{ ethereum_network_name }}"
@@ -116,4 +116,12 @@ prometheus_config: |
       static_configs:
         - targets: ["execution:{{ ethereum_node_el_ports_metrics }}"]
           labels:
-            instance: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
+            instance: "{{ inventory_hostname }}"
+    - job_name: "snooper"
+      scrape_interval: "1s"
+      static_configs:
+        - targets:
+            - "snooper-rpc:9090"
+            - "snooper-engine:9090"
+          labels:
+            instance: "{{ inventory_hostname }}"
