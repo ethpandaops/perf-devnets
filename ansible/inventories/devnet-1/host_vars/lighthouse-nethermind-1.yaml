@@ -1,13 +1,3 @@
 beacon_node_basic_auth: "{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}"
-lighthouse_validator_container_command:
-  - lighthouse
-  - validator_client
-  - --validators-dir=/validator-data/keys
-  - --secrets-dir=/validator-data/secrets
-  - --beacon-nodes=https://{{ beacon_node_basic_auth }}@bn.bootnode-1.perf-devnet-1.ethpandaops.io
-  - --init-slashing-protection
-  - --suggested-fee-recipient={{ lighthouse_validator_fee_recipient }}
-  - --metrics
-  - --metrics-address=0.0.0.0
-  - --metrics-allow-origin=*
-  - --metrics-port={{ lighthouse_ports_metrics }}
+lighthouse_beacon_endpoint: "https://{{ beacon_node_basic_auth }}@bn.bootnode-1.perf-devnet-1.ethpandaops.io"
+prysm_validator_enabled: false # Keep running lighthouse validator container
