@@ -92,31 +92,31 @@ prometheus_config: |
       static_configs:
         - targets: ["localhost:9090"]
           labels:
-            instance: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
+            instance: "{{ inventory_hostname }}"
     - job_name: "node"
       metrics_path: "/metrics"
       static_configs:
         - targets: ["172.17.0.1:9100"]
           labels:
-            instance: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
+            instance: "{{ inventory_hostname }}"
     - job_name: "exporter"
       metrics_path: "/metrics"
       static_configs:
         - targets: ["ethereum-metrics-exporter:9090"]
           labels:
-            instance: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
+            instance: "{{ inventory_hostname }}"
     - job_name: "consensus_node"
       metrics_path: "/metrics"
       static_configs:
         - targets: ["{{ vars[ethereum_node_cl + '_container_name'] }}:{{ ethereum_node_cl_ports_metrics }}"]
           labels:
-            instance: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
+            instance: "{{ inventory_hostname }}"
     - job_name: "execution"
       metrics_path: "/debug/metrics/prometheus"
       static_configs:
         - targets: ["execution:{{ ethereum_node_el_ports_metrics }}"]
           labels:
-            instance: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
+            instance: "{{ inventory_hostname }}"
     - job_name: "snooper"
       scrape_interval: "1s"
       static_configs:
@@ -124,4 +124,4 @@ prometheus_config: |
             - "snooper-rpc:9090"
             - "snooper-engine:9090"
           labels:
-            instance: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
+            instance: "{{ inventory_hostname }}"
