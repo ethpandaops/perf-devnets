@@ -1,4 +1,6 @@
 beacon_node_basic_auth: "{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}"
 lighthouse_beacon_endpoint: "https://{{ beacon_node_basic_auth }}@bn.bootnode-1.perf-devnet-1.ethpandaops.io"
-prysm_validator_enabled: false # Keep running lighthouse validator container
-ethereum_node_cl_validator_enabled: false # Keep running lighthouse validator container
+# Keep running lighthouse validator container
+prysm_validator_container_name: prysm-validator
+prysm_validator_enabled: false
+ethereum_node_cl_validator_enabled: false
