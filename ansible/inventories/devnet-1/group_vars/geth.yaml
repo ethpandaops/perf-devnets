@@ -92,4 +92,4 @@ prometheus_config: |
             - "snooper-rpc:9090"
             - "snooper-engine:9090"
           labels:
-            instance: "{{ inventory_hostname }}"
+            instance: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
