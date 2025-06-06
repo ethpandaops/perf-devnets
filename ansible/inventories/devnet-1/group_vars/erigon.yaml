@@ -27,7 +27,7 @@ erigon_container_command_extra_args:
   - --miner.gaslimit=100000000
   - --txpool.globalqueue=10000
   - --txpool.globalslots=10000
-  - --torrent.downloader.rate=1gb
+  - --torrent.download.rate=1gb
   - --shadowfork
   - --p2p.protocol=68
   - --maxpeers=200
