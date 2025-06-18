@@ -1,0 +1,7 @@
+﻿- name: Generate validator keys
+  hosts: ethereum_node
+  tasks:
+    - name: Generate validator keystores
+      ansible.builtin.include_role:
+        name: ethpandaops.general.ethereum_genesis
+        tasks_from: generate_validator_keys.yaml

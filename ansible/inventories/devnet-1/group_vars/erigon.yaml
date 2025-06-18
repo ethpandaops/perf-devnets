@@ -15,7 +15,11 @@ erigon_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_rcp_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_el_ports_http_rpc | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_rcp_hostname }}"
+<<<<<<< kch/bump_loglevel
   SNAPS_GIT_BRANCH: "perfnet2_shadow_fork_main"
+=======
+  SNAPS_GIT_BRANCH: perfnet2_shadow_fork_main
+>>>>>>> master
 erigon_container_command_extra_args:
   - --http.api=eth,erigon,engine,web3,net,debug,trace,txpool,admin
   - --http.vhosts=*
@@ -24,11 +28,19 @@ erigon_container_command_extra_args:
   - --networkid={{ ethereum_network_id }}
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --externalcl
+<<<<<<< kch/bump_loglevel
   - --torrent.download.rate=1gb
+=======
+  # - --no-downloader
+>>>>>>> master
   - --miner.gaslimit=100000000
   - --txpool.globalslots=10000
+<<<<<<< kch/bump_loglevel
   - --log.console.verbosity=trace
   - --log.dir.verbosity=trace
+=======
+  - --torrent.download.rate=1gb
+>>>>>>> master
   - --shadowfork
   - --p2p.protocol=68
   - --maxpeers=200

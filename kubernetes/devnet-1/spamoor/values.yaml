@@ -8,11 +8,11 @@ spamoor:
     pullPolicy: Always
   resources:
     requests:
-      cpu: 250m
-      memory: 500Mi
+      cpu: 500m
+      memory: 2Gi
     limits:
       cpu: 2000m
-      memory: 2Gi
+      memory: 6Gi
   ingress:
     enabled: true
     className: ingress-nginx-public
@@ -28,7 +28,7 @@ spamoor:
   privateKey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.spamoor_private_key}>"
   rpcEndpoints:
     # Rpc
-    - "http://geth-teku-001:8545"
+    # - "http://geth-teku-001:8545"
     - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.bootnode-1.perf-devnet-1.ethpandaops.io"
     - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-nethermind-1.perf-devnet-1.ethpandaops.io"
     - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-reth-1.perf-devnet-1.ethpandaops.io"
