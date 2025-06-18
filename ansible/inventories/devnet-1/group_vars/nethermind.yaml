@@ -40,6 +40,8 @@ nethermind_container_command_extra_args:
   - --Metrics.PushGatewayUrl={{ nethermind_push_gateway }}
   - --Blocks.TargetBlockGasLimit=100000000
   - --TxPool.Size=10000
+  - --Network.MaxActivePeers=200
+  - --log=INFO
 nethermind_container_pull: true
 
 prometheus_config: |

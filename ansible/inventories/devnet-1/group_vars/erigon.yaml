@@ -3,6 +3,7 @@ bootstrap_default_user_authorized_keys_github_team_el:
   - Giulio2002
   - yperbasis
   - somnathb1
+  - awskii
 
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: erigon
@@ -14,6 +15,7 @@ erigon_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_rcp_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_el_ports_http_rpc | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_rcp_hostname }}"
+  SNAPS_GIT_BRANCH: "perfnet2_shadow_fork_main"
 erigon_container_command_extra_args:
   - --http.api=eth,erigon,engine,web3,net,debug,trace,txpool,admin
   - --http.vhosts=*
@@ -22,10 +24,14 @@ erigon_container_command_extra_args:
   - --networkid={{ ethereum_network_id }}
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --externalcl
-  - --no-downloader
+  - --torrent.download.rate=1gb
   - --miner.gaslimit=100000000
-  - --txpool.globalqueue=10000
   - --txpool.globalslots=10000
+  - --log.console.verbosity=trace
+  - --log.dir.verbosity=trace
+  - --shadowfork
+  - --p2p.protocol=68
+  - --maxpeers=200
 erigon_init_custom_network: true
 erigon_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
 

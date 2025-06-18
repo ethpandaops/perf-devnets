@@ -24,6 +24,7 @@ geth_container_command_extra_args:
   - --miner.gaslimit=100000000
   - --txpool.globalqueue=10000
   - --txpool.globalslots=10000
+  - --maxpeers=200
 geth_init_custom_network: false
 geth_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
 geth_init_custom_network_container_command:
