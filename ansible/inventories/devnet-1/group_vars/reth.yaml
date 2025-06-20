@@ -24,7 +24,7 @@ reth_container_command_extra_args:
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --http.api=trace,rpc,eth,net,debug,web3,admin
   - --full
-  - --builder.gaslimit=100000000
+  - --builder.gaslimit=1000000000
   - --txpool.queued-max-count=10000
   - --max-outbound-peers=200
   - --max-inbound-peers=200

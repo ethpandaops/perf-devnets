@@ -29,7 +29,7 @@ besu_container_command_extra_args:
   - --rpc-http-api=ADMIN,DEBUG,ETH,MINER,NET,TRACE,TXPOOL,WEB3
   - --sync-mode=FULL
   - --version-compatibility-protection=false
-  - --target-gas-limit=100000000
+  - --target-gas-limit=1000000000
   - --max-peers=200
 besu_container_pull: true
 
