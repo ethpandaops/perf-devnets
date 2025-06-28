@@ -127,7 +127,6 @@ prometheus_config: |
             instance: "{{ inventory_hostname }}"
 
 # use snooper with prometheus metrics
-json_rpc_snooper_container_image: ethpandaops/rpc-snooper:0.0.4
 ethereum_node_json_rpc_snooper_engine_container_env:
   SNOOPER_METRICS_PORT: "9090"
   SNOOPER_METRICS_BIND: "0.0.0.0"
