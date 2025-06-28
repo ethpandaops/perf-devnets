@@ -79,16 +79,13 @@ prometheus_config: |
             instance: "{{ inventory_hostname }}"
 
 # use snooper with prometheus metrics
-json_rpc_snooper_container_image: ghcr.io/nethermindeth/jrpc-interceptor:pr-5
-json_rpc_snooper_user: root # Fix for https://github.com/openresty/docker-openresty/issues/119
-json_rpc_snooper_container_env:
-  LISTEN_PORT: "0.0.0.0:{{ json_rpc_snooper_port }}"
-  SERVICE_TO_PROXY: "{{ json_rpc_snooper_target | regex_replace('^https?://', '') }}"
-  LOG_SERVER_URL: "0.0.0.0:514"
-  USE_PROMETHEUS: "true"
-  PROMETHEUS_URL: "0.0.0.0:9090"
-  SERVER_NAME: "{{ inventory_hostname }}"
-json_rpc_snooper_container_command: []
+json_rpc_snooper_container_image: ethpandaops/rpc-snooper:0.0.4
+ethereum_node_json_rpc_snooper_engine_container_env:
+  SNOOPER_METRICS_PORT: "9090"
+  SNOOPER_METRICS_BIND: "0.0.0.0"
+  SNOOPER_API_PORT: "8961"
+  SNOOPER_API_AUTH: "{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}"
+ethereum_node_json_rpc_snooper_engine_public_port: 8961
 
 ethereum_node_docker_watchtower_enabled: true
 ethereum_node_docker_watchtower_containers_list:

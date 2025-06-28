@@ -150,6 +150,9 @@ xatu_sentry_config_network_name_override: "{{ ethereum_network_name }}"
 # role: ethpandaops.general.ethereum_metrics_exporter
 ethereum_metrics_exporter_container_image: "{{ default_tooling_images.ethereum_metrics_exporter }}"
 
+# role: ethpandaops.general.generate_kubernetes_config
+gen_kubernetes_config_dora_execution_snooper_port: 8961
+
 # role: eth_testnet_config
 eth_testnet_config_dir: /data/ethereum-network-config/metadata
 eth_testnet_config_local_dir_enabled: true
