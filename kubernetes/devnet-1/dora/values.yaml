@@ -4,7 +4,7 @@ dora:
   fullnameOverride: dora
   image:
     repository: docker.ethquokkaops.io/dh/ethpandaops/dora
-    tag: pk910-fix-snooper-authentication-latest
+    tag: pk910-exlude-proposer-execution-time-latest
     pullPolicy: Always
   resources:
     requests:
