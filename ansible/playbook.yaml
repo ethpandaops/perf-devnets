@@ -103,12 +103,6 @@
     - role: ethpandaops.general.ethereum_inventory_web
       tags: [eth_inventory_web, ethereum_inventory_web]
 
-- hosts: dora
-  become: true
-  roles:
-    - role: ethpandaops.general.dora
-      tags: [dora]
-
 - hosts: localhost
   roles:
     - role: ethpandaops.general.ethereum_post_network_setup
