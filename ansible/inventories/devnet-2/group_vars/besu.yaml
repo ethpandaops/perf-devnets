@@ -31,6 +31,7 @@ besu_container_command_extra_args:
   - --version-compatibility-protection=false
   - --target-gas-limit=1000000000
   - --max-peers=200
+  - --sync-mode=SNAP
 besu_container_pull: true
 
 prometheus_config: |
