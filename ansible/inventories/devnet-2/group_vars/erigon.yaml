@@ -27,8 +27,8 @@ erigon_container_command_extra_args:
   - --externalcl
   - --miner.gaslimit=1000000000
   - --txpool.globalslots=10000
-  - --log.console.verbosity=trace
-  - --log.dir.verbosity=trace
+  - --log.console.verbosity=info
+  - --log.dir.verbosity=debug
   - --torrent.download.rate=1gb
   - --el.block.downloader.v2
   - --p2p.protocol=68
