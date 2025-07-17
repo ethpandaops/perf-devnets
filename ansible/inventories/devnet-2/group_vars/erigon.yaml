@@ -27,10 +27,10 @@ erigon_container_command_extra_args:
   - --externalcl
   - --miner.gaslimit=1000000000
   - --txpool.globalslots=10000
-  - --log.console.verbosity=trace
-  - --log.dir.verbosity=trace
+  - --log.console.verbosity=info
+  - --log.dir.verbosity=debug
   - --torrent.download.rate=1gb
-  - --shadowfork
+  - --el.block.downloader.v2
   - --p2p.protocol=68
   - --maxpeers=200
 erigon_init_custom_network: true
