@@ -30,9 +30,9 @@ erigon_container_command_extra_args:
   - --txpool.globalslots=10000
   - --log.console.verbosity=info
   - --log.dir.verbosity=debug
-  - --metrics
   - --pprof
-  - --pprof.port=6061
+  - --pprof.addr=0.0.0.0
+  - --pprof.port=6060
   - --torrent.download.rate=1gb
   - --el.block.downloader.v2
   - --p2p.protocol=68
