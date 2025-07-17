@@ -32,6 +32,7 @@ erigon_container_command_extra_args:
   - --log.dir.verbosity=debug
   - --metrics
   - --pprof
+  - --pprof.port=6061
   - --torrent.download.rate=1gb
   - --el.block.downloader.v2
   - --p2p.protocol=68
