@@ -30,7 +30,7 @@ erigon_container_command_extra_args:
   - --log.console.verbosity=trace
   - --log.dir.verbosity=trace
   - --torrent.download.rate=1gb
-  - --shadowfork
+  - --el.block.downloader.v2
   - --p2p.protocol=68
   - --maxpeers=200
 erigon_init_custom_network: true
