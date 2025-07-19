@@ -103,7 +103,7 @@ testnet-homepage:
         blobscanethpandaUrl: https://blobscan.perf-devnet-1.ethpandaops.io
         ethstatsUrl: https://ethstats.perf-devnet-1.ethpandaops.io
         chainName: "perf-devnet-1"
-        chainId: "7069006433"
+        chainId: "7099953855"
         github: https://github.com/ethpandaops/perf-devnets/tree/master/network-configs/devnet-1/metadata
       metamask:
         enabled: true
