@@ -1,3 +1,6 @@
+default_ethereum_client_images:
+  geth: docker.ethquokkaops.io/dh/ethpandaops/geth:performance-archive
+
 geth_container_command_extra_args:
   - --http.api=eth,net,web3,debug,admin
   - --http.vhosts=*
