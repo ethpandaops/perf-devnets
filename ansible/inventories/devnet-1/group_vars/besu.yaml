@@ -31,6 +31,9 @@ besu_container_command_extra_args:
   - --version-compatibility-protection=false
   - --target-gas-limit=1000000000
   - --max-peers=200
+  - --sync-min-peers=1
+  - --static-nodes-file=/network-config/static-nodes.json
+  - --bonsai-limit-trie-logs-enabled=false
 besu_container_pull: true
 
 prometheus_config: |
