@@ -4,7 +4,7 @@ dora:
   fullnameOverride: dora
   image:
     repository: docker.ethquokkaops.io/dh/ethpandaops/dora
-    tag: pk910-exlude-proposer-execution-time-latest
+    tag: master-latest
     pullPolicy: Always
   resources:
     requests:
@@ -45,8 +45,8 @@ dora:
 
   endpoints:
   # Rpc
-  - url: http://teku-geth-001:5052
-    name: rpc-teku-geth-001
+  - url: http://prysm-geth-001:5052
+    name: rpc-prysm-geth-001
     archive: true
     priority: 1
   - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.bootnode-1.perf-devnet-1.ethpandaops.io
@@ -71,8 +71,8 @@ dora:
     priority: -1
   executionEndpoints:
   # Rpc
-  - url: http://geth-teku-001:8545
-    name: rpc-teku-geth-001
+  - url: http://geth-prysm-001:8545
+    name: rpc-prysm-geth-001
     archive: true
     priority: 1
   - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.bootnode-1.perf-devnet-1.ethpandaops.io

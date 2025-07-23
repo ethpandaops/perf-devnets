@@ -8,7 +8,7 @@ default_ethereum_client_images:
   teku: docker.ethquokkaops.io/dh/consensys/teku:latest
   grandine: docker.ethquokkaops.io/dh/ethpandaops/grandine:develop
   ### Execution layer clients
-  besu: docker.ethquokkaops.io/dh/ethpandaops/besu:performance
+  besu: docker.ethquokkaops.io/dh/ethpandaops/besu:performance-d770152
   geth: docker.ethquokkaops.io/dh/ethpandaops/geth:performance
   erigon: docker.ethquokkaops.io/dh/ethpandaops/erigon:performance
   ethereumjs: docker.ethquokkaops.io/dh/ethpandaops/ethereumjs:performance

@@ -45,8 +45,8 @@ checkpointz:
 
     beacon:
       upstreams:
-        - name: rpc-teku-geth-001
-          address: http://teku-geth-001:5052
+        - name: rpc-prysm-geth-001
+          address: http://prysm-geth-001:5052
           dataProvider: true
         - name: bootnode-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.bootnode-1.perf-devnet-1.ethpandaops.io

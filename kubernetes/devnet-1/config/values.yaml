@@ -1,7 +1,7 @@
 # Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/config.yaml.j2
 
 network: devnet-1
-chainId: 7069006433
+chainId: 7099953855
 
 domain: perf-devnet-1.ethpandaops.io
 

@@ -1,0 +1,15 @@
+default_ethereum_client_images:
+  geth: docker.ethquokkaops.io/dh/ethpandaops/geth:performance-archive
+
+geth_container_command_extra_args:
+  - --http.api=eth,net,web3,debug,admin
+  - --http.vhosts=*
+  - --networkid={{ ethereum_network_id }}
+  - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
+  - --miner.gaslimit=1000000000
+  - --txpool.globalqueue=10000
+  - --txpool.globalslots=10000
+  - --maxpeers=200
+  - --history.state=0
+  - --gcmode=archive
+  - --synctarget=0x3f906d6709efe0d1cff881b35539ea3c7653a7a23d8e9dd4ed65504cccc2b634

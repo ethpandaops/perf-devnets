@@ -17,8 +17,8 @@ forkmon:
   network: perf-devnet-1
   endpoints:
   # Rpc
-  - addr: http://geth-teku-001:8545
-    name: rpc-teku-geth-001
+  - addr: http://geth-prysm-001:8545
+    name: rpc-prysm-geth-001
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.bootnode-1.perf-devnet-1.ethpandaops.io
     name: bootnode-1
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-nethermind-1.perf-devnet-1.ethpandaops.io

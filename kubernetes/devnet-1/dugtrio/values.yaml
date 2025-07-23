@@ -29,8 +29,8 @@ dugtrio:
 
   endpoints:
   # Rpc
-  - url: http://teku-geth-001:5052
-    name: rpc-teku-geth-001
+  - url: http://prysm-geth-001:5052
+    name: rpc-prysm-geth-001
   - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.bootnode-1.perf-devnet-1.ethpandaops.io
     name: bootnode-1
   - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-nethermind-1.perf-devnet-1.ethpandaops.io

@@ -108,6 +108,8 @@ bootstrap_default_user_authorized_keys_github_all:
   - stdevMac
   - jochem-brouwer
   - Cperezz
+  - rjl493456442
+  - matkt
 
 bootstrap_default_user_authorized_keys_github: >
   {{
