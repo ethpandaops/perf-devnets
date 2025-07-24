@@ -37,6 +37,10 @@ erigon_container_command_extra_args:
   - --el.block.downloader.v2
   - --p2p.protocol=68
   - --maxpeers=200
+#   - --ots.search.max.pagesize=50
+#   - --http.corsdomain=*
+#   - --http.api=eth,erigon,engine,web3,net,debug,trace,txpool,admin,ots
+
 erigon_init_custom_network: true
 erigon_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
 
