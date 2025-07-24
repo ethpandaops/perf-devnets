@@ -35,6 +35,7 @@ besu_container_command_extra_args:
   - --sync-min-peers=1
   - --static-nodes-file=/network-config/static-nodes.json
   - --bonsai-limit-trie-logs-enabled=false
+  - --required-block=22899395=0xe452e5d4fc649919d484db11736a923e9d5ff424eb46cde36fcf19d827bf3d65
 besu_container_pull: true
 
 prometheus_config: |
