@@ -1,15 +1,22 @@
-default_ethereum_client_images:
-  geth: docker.ethquokkaops.io/dh/ethpandaops/geth:performance-archive
-
-geth_container_command_extra_args:
-  - --http.api=eth,net,web3,debug,admin
+erigon_container_command_extra_args:
+  - --http.api=eth,erigon,engine,web3,net,debug,trace,txpool,admin,ots
   - --http.vhosts=*
+  - --ws
+  - --prune.mode=full
   - --networkid={{ ethereum_network_id }}
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
+  - --externalcl
   - --miner.gaslimit=1000000000
-  - --txpool.globalqueue=10000
   - --txpool.globalslots=10000
+  - --log.console.verbosity=info
+  - --log.dir.verbosity=debug
+  - --pprof
+  - --pprof.addr=0.0.0.0
+  - --pprof.port=6060
+  - --torrent.download.rate=1gb
+  - --el.block.downloader.v2
+  - --p2p.protocol=68
   - --maxpeers=200
-  - --history.state=0
-  - --gcmode=archive
-  - --synctarget=0x3f906d6709efe0d1cff881b35539ea3c7653a7a23d8e9dd4ed65504cccc2b634
+  - --prune.mode=archive
+  - --ots.search.max.pagesize=50
+  - --http.corsdomain=*
