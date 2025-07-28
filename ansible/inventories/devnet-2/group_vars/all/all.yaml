@@ -110,6 +110,8 @@ bootstrap_default_user_authorized_keys_github_all:
   - Cperezz
   - rjl493456442
   - matkt
+  - mariusVanDerWijden
+  - rjl493456442
 
 bootstrap_default_user_authorized_keys_github: >
   {{
