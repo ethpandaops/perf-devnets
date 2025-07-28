@@ -34,6 +34,7 @@ teku_container_command_extra_args:
   - --logging=info
   - --Xlog-include-p2p-warnings-enabled
   - --metrics-block-timing-tracking-enabled
+  - --ignore-weak-subjectivity-period-enabled
 
 # role: ethpandaops.general.geth
 geth_container_name: execution

@@ -1,3 +1,4 @@
+ethereum_node_cl_checkpoint_sync_enabled: true
 erigon_container_command_extra_args:
   - --http.api=eth,erigon,engine,web3,net,debug,trace,txpool,admin,ots
   - --http.vhosts=*
@@ -17,6 +18,12 @@ erigon_container_command_extra_args:
   - --el.block.downloader.v2
   - --p2p.protocol=68
   - --maxpeers=200
-  - --prune.mode=archive
+  - --prune.mode=full
   - --ots.search.max.pagesize=50
   - --http.corsdomain=*
+  - --shadowfork.block=22758966
+
+lighthouse_container_command_extra_args:
+  - --testnet-dir=/network-config
+  - --boot-nodes={{ ethereum_cl_bootnodes | join(',') }}
+  - --invalid-gossip-verified-blocks-path=/data/lighthouse/invalid
