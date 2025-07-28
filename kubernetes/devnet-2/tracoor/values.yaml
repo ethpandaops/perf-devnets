@@ -125,16 +125,6 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
-      - name: prysm-geth-1
-        ethereum:
-          overrideNetworkName: perf-devnet-2
-          beacon:
-            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.prysm-geth-1.perf-devnet-2.ethpandaops.io
-          execution:
-            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.prysm-geth-1.perf-devnet-2.ethpandaops.io
-            traceDisableMemory: true
-            traceDisableStack: true
-            traceDisableStorage: true
       - name: teku-erigon-1
         ethereum:
           overrideNetworkName: perf-devnet-2
