@@ -109,3 +109,19 @@
       tags: [eth_post_network_setup, ethereum_post_network_setup]
     - role: ethpandaops.general.generate_kubernetes_config
       tags: [gen_kubernetes_config, generate_kubernetes_config]
+
+
+- name: Gather facts for all hosts
+  hosts: all
+  gather_facts: true
+  tasks: []
+  tags: [snapshotter]
+
+- hosts: snapshotter
+  serial: "{{ batch_count | default('100%') }}"
+  become: true
+  roles:
+    - role: ethpandaops.general.docker_nginx_proxy
+      tags: [snapshotter-web]
+    - role: ethpandaops.general.snapshotter
+      tags: [snapshotter]
