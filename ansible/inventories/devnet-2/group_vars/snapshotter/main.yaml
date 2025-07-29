@@ -1,0 +1,200 @@
+snapshotter_container_image: ghcr.io/ethpandaops/snapshotter:master@sha256:aec61131bff6e89744da15ea381ce20d92eb028ad4543fc91b148732f6c13b1c
+
+snapshotter_container_env:
+  S3_ENDPOINT_URL: "https://539bc53131934672bf85e7260ec0b218.r2.cloudflarestorage.com"
+  AWS_ACCESS_KEY_ID: "{{ secrets.snapshotter_bucket_access_key_id }}"
+  AWS_SECRET_ACCESS_KEY: "{{ secrets.snapshotter_bucket_secret_access_key }}"
+  # Nginx proxy
+  VIRTUAL_HOST: "snapshotter.{{ ethereum_network_name }}.ethpandaops.io"
+  VIRTUAL_PORT: "5001"
+  LETSENCRYPT_HOST: "snapshotter.{{ ethereum_network_name }}.ethpandaops.io"
+snapshotter_container_ports:
+  - "127.0.0.1:5001:5001"
+snapshotter_container_networks: "{{ docker_networks_shared }}"
+
+snapshotter_ssh_privkey: "{{ secrets.snapshotter_ssh_privkey }}"
+snapshotter_ssh_known_hosts: |
+  # 157.180.14.230:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|4hqdauaXmQCdUVZ+VLDg+gTzEvo=|d+0BUmoBHXFLeKA+1mBQv0HKafM= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCokPxhfxq1aGecJUrhyHpHI5mbQcuiO4S8F2SWDysBNvFm5qcM4A7AbESZaX6s7ZoNUo8aGA6RNNLYGLcBEhXsNlI6CGSA4cua2uF7yARM+NlxUbqYL0AzrJLlAerPQiZChrTaTWr+34uftculaqer37iU6N2f7VR4sr+OEVFeDiq8+vY3qZLFDbIWwb728jF0Uief3fA2XytBtS8DmcJfnMa0S9xfbnnWwV1nkXlEf+h3ZwQk0V4hYhXOLdx41sa3C/dHFCKn0wau+NsZsJGgJxyMmVDlo4GJRftzBRi4WnJQZoIEb/HMVkTkynr/cVpqo50qzeyPXqp+3nlmiC2z2FCjXENyLKq65HNOal94wvDPuyZugGCwCpn7MHLCzRjIqrld4QikKAjq7XpLoYtmRrKfmhM1nX5WSvyJSWf17R85ZEpgAo9TdAs8c/uEA4aRBb5ecuTGDlL6k8Br2FVOH8Aw1PV6ErJiHvdMsHgn1tXUsHxfhcZP2aokbZMF//8=
+  # 157.180.14.227:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|ogjkH6p94yvv0+IVuQvU9QIoXqY=|B0Zrr0VqcvLAKrn7Ns1R0cDm92c= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJE+RdKmPhQoAxSY1XwjrwRiC2o/DB1PO2RdIHeD8KeVhU9kNiBkJX3bGwpgnZc0gRtRl5QxNjTBNoNw/AxQEc0=
+  # 157.180.14.230:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|KdGWdHxBo11ktSlHYFRHUiAalZM=|MrNnPGYPuywk0+Xc9tVsNlvjHVE= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNtj5+t5vw6/5HThZ7Yuxxu5v9ztiGQJfLiydgEomF6ha8fdPULGCMrnbmjN7vvLYRXoDSE7Bea5FRWVgeUwC0s=
+  # 157.180.14.230:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|jDm49BeBvzEl85ei51JZLDwTTig=|1FKTxXIAFjeg4/jLvridWOwOFxY= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGjWO7NgbXeUSvx5s/nIYX5H8zpnCK9VQSQ3LHG6MSS7
+  # 157.180.14.230:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  # 157.180.14.230:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  # 157.180.14.227:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|6PACVzLwxAjA8ExtQZQs1BkukFU=|+tX0AAkAZsJqa4zr3pK6Tj+QeS0= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCZ1yX87LYwErNMYlu7QCDKn1uk5LTtdqRoeY2AOTGNght1da5+Qf/uL/gxjvx9mMMqO1UtAY/+t2vjVfyW9MY7vubEIr2UFO4wO/hJ3pqSiylWlekmXUzENg8msAfGliB7FEqbtpymrs/x8o3lZTwAug+j41M2kx9H0I6h7aace5cCFUGE64aqdd08uqvFwjS9h2o2x+Ge5Oby4/LLNjjjqsZOia5iyiNZ7q90xvME2Prz5fP96XorIcVEesSMjbgpMQXR6WFJ8FmPKi5vOhtsEkn176BH2WkHbromTY/e8d+werl8m9GE+fqsXQzRbdYaKZ4nwbwo0xz9hPTrcus9iwq7QpuNgIdJ1OhMc7rw81iuH/tj9S23iyKVi45ywEs3EYuv4EJ5kY/Q7eN8eIxR1yBpC32cfLPZcmSWNn87AhrWsozjEhgz3IEUP5XXbW7/ZaZggrO12qBZj4xXruRi9jJ++RumUWuh547PoY+R80Gv7cP2A11c+zhVRLXhjJk=
+  # 157.180.14.227:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|y0VGu2WrjYaWxfvFG0Pc5FbUQZA=|f7/BbHJwrlOV2CETSpU1JFP1Du8= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN2X7b9lg9jNleXyZk62PRFHwKgrZSQF7QMPdQTs9SZf
+  # 157.180.14.227:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  # 157.180.14.227:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  # 157.180.14.226:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|vAcXHKoIuaPEL+0oI0mYRD5anaQ=|kWIOmjnxq586kX2gaPg7y74ozU4= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCx82YDVJGes8NwQVgtA7KYMsrli9lOFLj/K/PwDSC4zJlLF7YcBqLfxnwCE7++bMJDTYOEr5OAQ3Sr1Iop33m9F8h3hhPkfZZiaofQUwrS5K4O6/qMI4YJ/IA1MUGQSdr0pS9vsIrDWR3DynsagMlt1UFP/f7nyLxykM4kLWUoQ9aw5mh7Y+fHBbXGMWZkkhm5SfhAMYjSzN8YM5EQMzGap7L27Q6+5En1E2J9ki1/y50mUFb9GNhiUawiD18fiPlbRkXkIo9YQ1Xd/HzyD62qs13n5fhnkVgRgz29nj8L100Cr+YP6gq90rMs8EbItc+oiuuP4EFFEjQ/wbsgVvyWkFbKupdviWzN1ofYI8OXVtGcZ+ZOjL9Rtui40hEHeyqsgY8CaygiQq/bldLfCj/6jJFB5sioAZG9gUNsgVeAQCFgWGKJUUkvFhCVBV8eBQV2TSkcV2jlQa86jmPLJJrVcO7f0vEDLvYmcCfdt9797uukx34VQbLN/PGksgDFH70=
+  # 157.180.14.226:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|dancaIX+pW1GUgXZaJtFvGk3M7k=|WCpJjmIDVt4p1OtE8sea6BYgoqo= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIxdnqNTf4uEzxC74UYnRU5B/UYQWtnwyCRA0n/Z7+zRZeywug3I3qJQ5jbfFOoSwNjQtnWbjJbD+2BINOo6Ygs=
+  # 157.180.14.226:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|imOpffrLn8cN+SG99suOEnpjnBg=|4qpBlkf1w3YXv9tEfPzJcCEWGKc= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDMcUEjYUylM1hnWsk+qNlnUnARls1aWYrxKAiZAXi7P
+  # 157.180.14.226:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  # 157.180.14.226:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  # 157.180.14.225:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|dxRKxAOwuWVMzbf117rIqtgIsaY=|YhroP4Oin3/eupmxmkGVLuGPcdI= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCsd0x36bjB/phOeDMxySy+/Lv7HRZhbXUHnRPDu/moq8vzQV18aGPhIt6YEYvT+FzEcclhpSsy7L8jhFxwhGDPEU41Ar6KYm8Ur0t1KQVpk+rzuEDUYtzbrvrsFIslzf1+nWcCat6C6eM9CXYZoIixvpmCS1G+pPKjPEgO3HNj6BlQFCHoUAIZF1diPGs1D1srjo6awddKvuuLHkqHZcI+Tt8b1nCNO2lSbOO+PcpEniEdCJNssGigLtQ7pYqCB9lo3a9jtouAItIUITh86z9NODcwF/VeEavfYx02BGyKN/atY9nTejwbpEfpJdYah4yIx5PEk5OJJWsjHZvAFA8I8OVe6c8cPPQgxoCLe0FJ+nSuWomyWwv7LJ5o2jzusZ8rvZ2TutN7TPaE8usT6hYCRVrlwIexAFtCPByEXKv410HhlXldlN/Eo60gHgA7nZT75b+NsG5jUYwcUUTejFzlh0otFfpohZA28us8Brhk5j2KvDoorcYcCv9B3EGht3U=
+  # 157.180.14.225:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|/BYe78cOe0c56Iq3eepeBDdn1x0=|2BADz4AyqFjF951sCK5s+gSo6pc= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDgWKnrHEcklQRGZ31e/juqkf8BNhV+PGqIZHzkK2Y38U4o0s4eakuPEelXN4KDdP9x9UC/kUxJy/5GtW4vECxY=
+  # 157.180.14.225:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|OjVDLpcfFBUSYNKmOnIAfUTI1b0=|SzqQkOXxHBm58DLOeSrGLfbm4GQ= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJHzsgwikNchrnlSQhWAHMUKfoo/ILGQJguUPPqy8BEd
+  # 157.180.14.225:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  # 157.180.14.225:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  # 157.180.14.228:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|ZScxYnotE4f6neSX/BGs3Np5zmo=|AG1/h+vRwGi8O21UFdhQW5xEuTA= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDW7KzMTw9bgSzXiVZS3aq3mdK44oUkQ9GJL5CZ1Fh5kWonPd7olc9o9UXBP8QYtdlCIz4bR6p+eLy1Nwzxhbt9V3Sald2JPbMBJx2yUu1rLYPur6efay5rvHJtZMY3JNkSBeZpeiQyZXtE6PWCvrADWs2EKCRpYX7hFcEwX5cnnnXyhiDnVwCXkTF4mjVM2H24FsEroKDbFsEHegGLrVL1XbD8Kwm2H4SqBGdp+1cJVFjvGcyOsflLekViMagjc4SGcmC89ICV5p5vY/7HrO2uLM9Y5bqtVbgTCSGkxkv7V2XnL9WWpujFS/H4kPoRuSe0hIxnGf8cp3AoDbxP5js50xc21uXiZPZgwFrhk+kZxTGdDpL6CXSlxDYz6lJV4kLbNkvOJTRzJKiaFgFp7p8dos06b3Rg2k/s9BxNqDqfDoH7HHajpKypW3CtSTrE7knflZ7P5VfKmsvK/Kg51y4BmV36936ql3VwvjBZUR0jNXc8nHHjlGaDt9O/lwzD08c=
+  # 157.180.14.228:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|EngUx4r/7Fi7NfoWl5ThSCLxfWE=|AeyQXZaTAzH44byDnTerpnQ8zTw= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBH+s1zRhho5xbx487u/UzyfWQN7giwHQSe+DD6W1jdQRIgc8dh6LATY2jqJEFgUzkdg4Vj3FGBh/Jz+J4v91QBQ=
+  # 157.180.14.228:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  |1|7vpt7zT5HFGjEOE5SchF5bg1EL4=|ADtLXdnQV+cwtu3nDXRwD15Z0xc= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2d6mXvodhrXnBXKDr7nOrkUfISeDZ+jU4sB7Y3XkMy
+  # 157.180.14.228:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  # 157.180.14.228:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+
+snapshotter_config: |
+  server:
+    listen_addr: 0.0.0.0:5001
+    auth:
+      api_token: "{{ secrets.snapshotter_api_auth}}"
+  global:
+    logging: warn
+    chainID: "{{ '%#x' % (ethereum_network_id | int) }}" # hex
+    database:
+      path: /etc/snapshotter/snapshots.db
+    ssh:
+      private_key_path: /etc/snapshotter/.ssh/id_rsa
+      known_hosts_path: /etc/snapshotter/.ssh/known_hosts
+      ignore_host_key: false
+      use_agent: false
+    snapshots:
+      check_interval_seconds: 1
+      block_interval: 22923350
+      run_once: false
+      s3:
+        bucket_name: "ethpandaops-ethereum-node-snapshots"
+        region: "auto"
+        endpoint: $S3_ENDPOINT_URL
+        root_prefix: "{{ ethereum_network_name }}"
+      cleanup:
+        enabled: true
+        keep_count: 5
+        check_interval_hours: 6
+      rclone:
+        version: "1.65.2"
+        env:
+          RCLONE_CONFIG_MYS3_TYPE: s3
+          RCLONE_CONFIG_MYS3_PROVIDER: Cloudflare
+          #RCLONE_CONFIG_MYS3_ACL: public-read
+          RCLONE_CONFIG_MYS3_NO_CHECK_BUCKET: true
+  targets:
+    ssh:
+      - alias: "geth"
+        host: "{{ hostvars[groups['geth'][0]].ansible_host }}"
+        user: "devops"
+        port: 22
+        data_dir: /data/geth/geth
+        upload_prefix: {{ ethereum_network_name }}/geth
+        metadata:
+          extra_args: "{{ hostvars[groups['geth'][0]].geth_container_command_extra_args | join(', ') }}"
+        docker_containers:
+          engine_snooper: snooper-engine
+          execution: execution
+          beacon: beacon
+        endpoints:
+          beacon: http://localhost:5052
+          execution: http://localhost:8545
+      - alias: "nethermind"
+        host: "{{ hostvars[groups['nethermind'][0]].ansible_host }}"
+        user: "devops"
+        port: 22
+        data_dir: /data/nethermind/nethermind_db
+        upload_prefix: {{ ethereum_network_name }}/nethermind
+        metadata:
+          extra_args: "{{ hostvars[groups['nethermind'][0]].nethermind_container_command_extra_args | join(', ') }}"
+        docker_containers:
+          engine_snooper: snooper-engine
+          execution: execution
+          beacon: beacon
+        endpoints:
+          beacon: http://localhost:5052
+          execution: http://localhost:8545
+      - alias: "besu"
+        host: "{{ hostvars[groups['besu'][0]].ansible_host }}"
+        user: "devops"
+        port: 22
+        data_dir: /data/besu
+        upload_prefix: {{ ethereum_network_name }}/besu
+        metadata:
+          extra_args: "{{ hostvars[groups['besu'][0]].besu_container_command_extra_args | join(', ') }}"
+        docker_containers:
+          engine_snooper: snooper-engine
+          execution: execution
+          beacon: beacon
+        endpoints:
+          beacon: http://localhost:5052
+          execution: http://localhost:8545
+      - alias: "erigon"
+        host: "{{ hostvars[groups['erigon'][0]].ansible_host }}"
+        user: "devops"
+        port: 22
+        data_dir: /data/erigon
+        upload_prefix: {{ ethereum_network_name }}/erigon
+        metadata:
+          extra_args: "{{ hostvars[groups['erigon'][0]].erigon_container_command_extra_args | join(', ') }}"
+        docker_containers:
+          engine_snooper: snooper-engine
+          execution: execution
+          beacon: beacon
+        endpoints:
+          beacon: http://localhost:5052
+          execution: http://localhost:8545
+      - alias: "reth"
+        host: "{{ hostvars[groups['reth'][0]].ansible_host }}"
+        user: "devops"
+        port: 22
+        data_dir: /data/reth
+        upload_prefix: {{ ethereum_network_name }}/reth
+        metadata:
+          extra_args: "{{ hostvars[groups['reth'][0]].reth_container_command_extra_args | join(', ') }}"
+        docker_containers:
+          engine_snooper: snooper-engine
+          execution: execution
+          beacon: beacon
+        endpoints:
+          beacon: http://localhost:5052
+          execution: http://localhost:8545
+
+
+docker_nginx_proxy_container_custom_vhost_files:
+  "snapshotter.{{ ethereum_network_name }}.ethpandaops.io_location_override": |
+    location / {
+        if ($request_method = 'OPTIONS') {
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            #
+            # Custom headers and headers various browsers *should* be OK with but aren't
+            #
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Pragma';
+            #
+            # Tell client that this pre-flight info is valid for 20 days
+            #
+            add_header 'Access-Control-Max-Age' 1728000;
+            add_header 'Content-Type' 'text/plain; charset=utf-8';
+            add_header 'Content-Length' 0;
+            return 204;
+        }
+        if ($request_method = 'POST') {
+            add_header 'Access-Control-Allow-Origin' '*' always;
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;
+        }
+        if ($request_method = 'GET') {
+            add_header 'Access-Control-Allow-Origin' '*' always;
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range' always;
+        }
+        proxy_pass http://snapshotter.{{ ethereum_network_name }}.ethpandaops.io;
+        set $upstream_keepalive true;
+    }
