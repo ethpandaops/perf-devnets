@@ -24,7 +24,7 @@ erigon_container_command_extra_args:
   - --ws
   - --prune.mode=full
   - --networkid={{ ethereum_network_id }}
-  - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
+  - --trustedpeers={{ ethereum_el_bootnodes | join(',') }}
   - --externalcl
   - --miner.gaslimit=1000000000
   - --txpool.globalslots=10000
