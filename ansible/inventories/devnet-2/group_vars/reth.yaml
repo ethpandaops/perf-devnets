@@ -26,8 +26,6 @@ reth_container_command_extra_args:
   - --full
   - --builder.gaslimit=1000000000
   - --txpool.queued-max-count=10000
-  - --max-outbound-peers=200
-  - --max-inbound-peers=200
 prometheus_config: |
   global:
     scrape_interval: 30s

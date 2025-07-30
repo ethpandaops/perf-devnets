@@ -36,7 +36,6 @@ erigon_container_command_extra_args:
   - --torrent.download.rate=1gb
   - --el.block.downloader.v2
   - --p2p.protocol=68
-  - --maxpeers=200
 #   - --ots.search.max.pagesize=50
 #   - --http.corsdomain=*
 #   - --http.api=eth,erigon,engine,web3,net,debug,trace,txpool,admin,ots

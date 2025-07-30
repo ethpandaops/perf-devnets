@@ -30,7 +30,6 @@ besu_container_command_extra_args:
   - --rpc-http-api=ADMIN,DEBUG,ETH,MINER,NET,TRACE,TXPOOL,WEB3
   - --version-compatibility-protection=false
   - --target-gas-limit=1000000000
-  - --max-peers=200
   - --sync-mode=SNAP
   - --sync-min-peers=1
   - --static-nodes-file=/network-config/static-nodes.json
