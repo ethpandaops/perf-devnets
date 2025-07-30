@@ -12,7 +12,7 @@ eth_inventory_web_container_env:
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: geth
 ethereum_node_cl: teku
-ethereum_node_cl_validator_enabled: true
+ethereum_node_cl_validator_enabled: false
 
 # role: ethpandaops.general.teku
 teku_container_name: beacon
@@ -25,23 +25,6 @@ teku_container_volumes:
   - "{{ teku_datadir }}:/data"
   - "{{ teku_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
-
-# role: validator_keys
-validator_keys_sync_files:
-  - src: "{{ inventory_dir }}/files/validator_keys/{{ inventory_hostname }}/teku-keys/"
-    dest: "{{ teku_validator_datadir }}/keys/"
-  - src: "{{ inventory_dir }}/files/validator_keys/{{ inventory_hostname }}/teku-secrets/"
-    dest: "{{ teku_validator_datadir }}/secrets/"
-
-validator_bls_sync_files:
-  - src: "{{ inventory_dir }}/files/validator_keys/{{ inventory_hostname }}/change_operations.json"
-    dest: "{{ teku_validator_datadir }}/change_operations.json"
-    owner: teku
-    group: teku
-
-teku_validator_container_volumes:
-  - "{{ teku_validator_datadir }}:/validator-data"
-teku_validator_datadir: /data/teku-validator
 
 teku_container_command_extra_args:
   - --network=/network-config/config.yaml
