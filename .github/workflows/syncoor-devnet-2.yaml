@@ -51,7 +51,8 @@ jobs:
     # - ccx23: 4 cores, 16GB, 160GB disk
     # - ccx33: 8 cores, 32GB, 240GB disk
     # - ccx43: 16 cores, 64GB, 360GB disk
-    runs-on: self-hosted-ghr-size-ccx33-x64
+    runs-on:
+        group: synctest
     #concurrency:
     #  group: >-
     #    ${{ matrix.network }}-${{ matrix.el-client }}-${{ matrix.cl-client }}
