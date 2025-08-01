@@ -1,0 +1,50 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/spamoor.yaml.j2
+
+syncoor-web:
+  fullnameOverride: syncoor-web
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/ethpandaops/syncoor-web
+            tag: master
+            pullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+  configMaps:
+    config:
+      enabled: true
+      data:
+        config.json: |
+          {
+            "directories": [
+              {
+                "name": "perf-devnet-2",
+                "url": "https://syncoor-data.ethpandaops.io/devnets/perf-devnet-2"
+              }
+            ],
+            "syncoorApiEndpoints": [
+              {
+                "name": "Syncoor",
+                "url": "https://syncoor-api.perf-devnet-2.ethpandaops.io"
+              }
+            ]
+          }
+  ingress:
+    main:
+      className: ingress-nginx-public
+      enabled: true
+      hosts:
+        - host: syncoor.perf-devnet-2.ethpandaops.io
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: main
+                port: http
