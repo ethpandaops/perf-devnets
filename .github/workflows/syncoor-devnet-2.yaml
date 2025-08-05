@@ -144,6 +144,7 @@ jobs:
         s3-path: devnets/${{ matrix.network }}
         rclone-config: ${{ secrets.SYNCOOR_RCLONE_CONFIG }}
         rclone-version: ${{ env.INSTALL_RCLONE_VERSION }}
+        enclave: ${{ github.run_id }}
 
     - name: Update test results index
       uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
@@ -159,3 +160,14 @@ jobs:
               's3-path': 'devnets/${{ matrix.network }}'
             }
           });
+
+  cleanup:
+    name: Cleanup
+    runs-on:
+      group: synctest
+    needs: sync
+    if: always()
+    steps:
+    - name: Cleanup resources
+      run: |
+        kurtosis clean ${{ github.run_id }} -f
