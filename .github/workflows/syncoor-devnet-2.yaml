@@ -117,7 +117,7 @@ jobs:
         fi
 
     - name: Run Syncoor Test
-      uses: ethpandaops/syncoor@master
+      uses: ethpandaops/syncoor@bbusa/fix-checkpoint-url
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         server: https://syncoor-api.perf-devnet-2.ethpandaops.io
