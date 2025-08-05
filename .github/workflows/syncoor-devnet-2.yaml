@@ -18,7 +18,7 @@ on:
       run-timeout:
         description: 'Timeout for the sync test'
         required: false
-        default: '3h'
+        default: '48h'
         type: string
       el-image:
         description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
@@ -45,7 +45,7 @@ jobs:
     # - 24h -> 1440m
     # - 48h -> 2880m
     # - 72h -> 4320m
-    timeout-minutes: 240 # 4h
+    timeout-minutes: 4320 # 72h
     # Self-hosted runner sizes:
     # - ccx13: 2 cores, 8GB, 80GB disk
     # - ccx23: 4 cores, 16GB, 160GB disk
