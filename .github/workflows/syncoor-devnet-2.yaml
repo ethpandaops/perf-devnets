@@ -171,4 +171,4 @@ jobs:
     steps:
     - name: Cleanup resources
       run: |
-        kurtosis rm ${{ github.run_id }} -f
+        kurtosis enclave rm ${{ github.run_id }} -f
