@@ -18,7 +18,7 @@ on:
       run-timeout:
         description: 'Timeout for the sync test'
         required: false
-        default: '48h'
+        default: '70h'
         type: string
       el-image:
         description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
@@ -137,7 +137,7 @@ jobs:
             ''
           }}
         check-interval: 30s
-        run-timeout: ${{ inputs.run-timeout || '60m' }}
+        run-timeout: ${{ inputs.run-timeout || '70h' }}
         log-level: info
         report-dir: ./test-reports
         s3-upload: true
