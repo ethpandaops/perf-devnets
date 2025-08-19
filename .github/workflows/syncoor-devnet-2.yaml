@@ -126,7 +126,7 @@ jobs:
         server-auth: ${{ secrets.SYNCOOR_SERVER_AUTH }}
         log-force-colors: true
         public: true
-        client-logs: ${{ (inputs.log-level-cl != 'debug' && inputs.log-level-el != 'debug') || 'true' }}
+        client-logs: ${{ inputs.log-level-cl != 'debug' && inputs.log-level-el != 'debug' }}
         log-level-cl: ${{ inputs.log-level-cl || 'info' }}
         log-level-el: ${{ inputs.log-level-el || 'info' }}
         network: ${{ matrix.network }}
