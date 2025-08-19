@@ -30,6 +30,16 @@ on:
         required: false
         default: '{"lighthouse": "ethpandaops/lighthouse:unstable", "teku": "ethpandaops/teku:master", "prysm": "ethpandaops/prysm-beacon-chain:develop", "nimbus": "ethpandaops/nimbus-eth2:unstable", "lodestar": "ethpandaops/lodestar:latest", "grandine": "ethpandaops/grandine:latest"}'
         type: string
+      log-level-cl:
+        description: 'Log level for consensus layer clients (debug, info, warn, error)'
+        required: false
+        default: 'info'
+        type: string
+      log-level-el:
+        description: 'Log level for execution layer clients (debug, info, warn, error)'
+        required: false
+        default: 'info'
+        type: string
 
 env:
   INSTALL_RCLONE_VERSION: v1.68.2
@@ -115,8 +125,10 @@ jobs:
         server: https://syncoor-api.perf-devnet-2.ethpandaops.io
         server-auth: ${{ secrets.SYNCOOR_SERVER_AUTH }}
         log-force-colors: true
-        client-logs: true
         public: true
+        client-logs: ${{ (inputs.log-level-cl != 'debug' && inputs.log-level-el != 'debug') || 'true' }}
+        log-level-cl: ${{ inputs.log-level-cl || 'info' }}
+        log-level-el: ${{ inputs.log-level-el || 'info' }}
         network: ${{ matrix.network }}
         el-client: ${{ matrix.el-client }}
         cl-client: ${{ matrix.cl-client }}
