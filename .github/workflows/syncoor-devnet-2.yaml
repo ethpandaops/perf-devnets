@@ -143,7 +143,6 @@ jobs:
         check-interval: 30s
         run-timeout: ${{ inputs.run-timeout || '70h' }}
         log-level: info
-        report-dir: ./test-reports
         s3-upload: true
         s3-bucket: ${{ env.S3_BUCKET }}
         s3-path: devnets/${{ matrix.network }}
