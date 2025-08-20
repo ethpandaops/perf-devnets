@@ -136,8 +136,11 @@ jobs:
         cl-image: ${{ steps.parse-images.outputs.cl-image }}
         el-extra-args: >-
           ${{
-            (matrix.el-client == 'reth') && '--full' ||
-            (matrix.el-client == 'erigon') && '--prune.mode=full' ||
+            (matrix.el-client == 'besu') && '--discovery-enabled=false' ||
+            (matrix.el-client == 'erigon') && '--prune.mode=full --nodiscover' ||
+            (matrix.el-client == 'geth') && '--nodiscover' ||
+            (matrix.el-client == 'nethermind') && '--Init.DiscoveryEnabled=false' ||
+            (matrix.el-client == 'reth') && '--full --disable-discovery' ||
             ''
           }}
         check-interval: 30s
