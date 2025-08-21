@@ -142,6 +142,8 @@ jobs:
             (matrix.el-client == 'nethermind') && '[
             "--Init.DiscoveryEnabled=false",
             "--Network.DiscoveryDns=dummy",
+            "--Network.MaxActivePeers=0",
+            "--Network.StaticPeers=enode://62b16e448d6aa6a8ff7a2a25701b43935d956398d7f7bf57fccce281dd989d19cee4d6e2142e11d4be42ffacc394a138b686099885a11d50b4e13db5b8080180@157.180.14.225:30303",
             "--Init.StaticNodesPath=/data/static-nodes.json",
             "--Init.TrustedNodesPath=/data/trusted-nodes.json"
             ]' ||
