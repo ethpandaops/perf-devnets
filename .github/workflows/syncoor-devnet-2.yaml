@@ -136,11 +136,17 @@ jobs:
         cl-image: ${{ steps.parse-images.outputs.cl-image }}
         el-extra-args: >-
           ${{
-            (matrix.el-client == 'besu') && '--discovery-enabled=false' ||
-            (matrix.el-client == 'erigon') && '--prune.mode=full --nodiscover' ||
-            (matrix.el-client == 'geth') && '--nodiscover' ||
-            (matrix.el-client == 'nethermind') && '--Init.DiscoveryEnabled=false' ||
-            (matrix.el-client == 'reth') && '--full --disable-discovery' ||
+            (matrix.el-client == 'besu') && '["--discovery-enabled=false"]' ||
+            (matrix.el-client == 'erigon') && '["--prune.mode=full", "--nodiscover"]' ||
+            (matrix.el-client == 'geth') && '["--nodiscover"]' ||
+            (matrix.el-client == 'nethermind') && '[
+            "--Init.DiscoveryEnabled=false",
+            "--Network.DiscoveryDns=dummy",
+            "--Network.MaxActivePeers=0",
+            "--Init.StaticNodesPath=/data/static-nodes.json",
+            "--Init.TrustedNodesPath=/data/trusted-nodes.json"
+            ]' ||
+            (matrix.el-client == 'reth') && '["--full", "--disable-discovery"]' ||
             ''
           }}
         check-interval: 30s
