@@ -136,18 +136,34 @@ jobs:
         cl-image: ${{ steps.parse-images.outputs.cl-image }}
         el-extra-args: >-
           ${{
-            (matrix.el-client == 'besu') && '["--discovery-enabled=false"]' ||
-            (matrix.el-client == 'erigon') && '["--prune.mode=full", "--nodiscover"]' ||
-            (matrix.el-client == 'geth') && '["--nodiscover"]' ||
-            (matrix.el-client == 'nethermind') && '[
-            "--Init.DiscoveryEnabled=false",
-            "--Network.DiscoveryDns=dummy",
-            "--Network.MaxActivePeers=0",
-            "--Network.StaticPeers=enode://62b16e448d6aa6a8ff7a2a25701b43935d956398d7f7bf57fccce281dd989d19cee4d6e2142e11d4be42ffacc394a138b686099885a11d50b4e13db5b8080180@157.180.14.225:30303",
-            "--Init.StaticNodesPath=/data/static-nodes.json",
-            "--Init.TrustedNodesPath=/data/trusted-nodes.json"
+            (matrix.el-client == 'besu') && '[
+              "--required-block=23115201=0x88b0d56cc14c5232cdf6238c7252ca953e505f2a44ee60374f2bafb18bf067bf",
+              "--bootnodes=enode://3ba5f46aa1a9d863de4ce5ff67ec46704c43b2a1d5100e272dbfec5e56b350113018d3e67c400f09db60d4ec55df025bd209802c67826717a33a48acbe13b305@157.180.14.226:30303"
             ]' ||
-            (matrix.el-client == 'reth') && '["--full", "--disable-discovery"]' ||
+            (matrix.el-client == 'erigon') && '[
+              "--prune.mode=full",
+              "--nodiscover",
+              "--staticpeers=enode://3ba5f46aa1a9d863de4ce5ff67ec46704c43b2a1d5100e272dbfec5e56b350113018d3e67c400f09db60d4ec55df025bd209802c67826717a33a48acbe13b305@157.180.14.226:30303",
+              "--bootnodes=enode://3ba5f46aa1a9d863de4ce5ff67ec46704c43b2a1d5100e272dbfec5e56b350113018d3e67c400f09db60d4ec55df025bd209802c67826717a33a48acbe13b305@157.180.14.226:30303"
+            ]' ||
+            (matrix.el-client == 'geth') && '[
+              "--eth.requiredblocks=23115201=0x88b0d56cc14c5232cdf6238c7252ca953e505f2a44ee60374f2bafb18bf067bf",
+              "--bootnodes=enode://3ba5f46aa1a9d863de4ce5ff67ec46704c43b2a1d5100e272dbfec5e56b350113018d3e67c400f09db60d4ec55df025bd209802c67826717a33a48acbe13b305@157.180.14.226:30303"
+            ]' ||
+            (matrix.el-client == 'nethermind') && '[
+              "--Init.DiscoveryEnabled=false",
+              "--Network.DiscoveryDns=dummy",
+              "--Network.MaxActivePeers=0",
+              "--Network.OnlyStaticPeers=true"
+              "--Network.StaticPeers=enode://3ba5f46aa1a9d863de4ce5ff67ec46704c43b2a1d5100e272dbfec5e56b350113018d3e67c400f09db60d4ec55df025bd209802c67826717a33a48acbe13b305@157.180.14.226:30303",
+              "--Init.StaticNodesPath=/data/static-nodes.json",
+              "--Init.TrustedNodesPath=/data/trusted-nodes.json"
+            ]' ||
+            (matrix.el-client == 'reth') && '[
+              "--full",
+              "--disable-discovery",
+              "--bootnodes=enode://3ba5f46aa1a9d863de4ce5ff67ec46704c43b2a1d5100e272dbfec5e56b350113018d3e67c400f09db60d4ec55df025bd209802c67826717a33a48acbe13b305@157.180.14.226:30303"
+            ]' ||
             ''
           }}
         check-interval: 30s
