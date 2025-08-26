@@ -164,7 +164,7 @@ jobs:
             (matrix.el-client == 'reth') && '[
               "--full",
               "--disable-discovery",
-              "--bootnodes=enode://d54f2c88dad80719c6f2be2c9925c6c2609f845ed84c9e2f961c2a7e67bfe218a657118a70a45d1b245e96e2678b0276ca2ca869d7aa5688fcb1a52381d6a1e3@157.180.14.230:30303?discport=30303,enode://3ba5f46aa1a9d863de4ce5ff67ec46704c43b2a1d5100e272dbfec5e56b350113018d3e67c400f09db60d4ec55df025bd209802c67826717a33a48acbe13b305@157.180.14.226:30303"
+              "--bootnodes=enode://d54f2c88dad80719c6f2be2c9925c6c2609f845ed84c9e2f961c2a7e67bfe218a657118a70a45d1b245e96e2678b0276ca2ca869d7aa5688fcb1a52381d6a1e3@157.180.14.230:30303,enode://3ba5f46aa1a9d863de4ce5ff67ec46704c43b2a1d5100e272dbfec5e56b350113018d3e67c400f09db60d4ec55df025bd209802c67826717a33a48acbe13b305@157.180.14.226:30303"
             ]' ||
             ''
           }}
