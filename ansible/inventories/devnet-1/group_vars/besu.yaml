@@ -35,6 +35,8 @@ besu_container_command_extra_args:
   - --static-nodes-file=/network-config/static-nodes.json
   - --bonsai-limit-trie-logs-enabled=false
   - --snapsync-server-enabled
+  - --required-block=23134136=0xf1b6badbbdf9ec7f1fab3247e3a39daa449a43752028485b3d387f6fa5f446aa
+
 besu_container_pull: true
 
 prometheus_config: |

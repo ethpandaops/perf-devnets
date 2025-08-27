@@ -48,6 +48,8 @@ geth_container_command_extra_args:
   - --networkid={{ ethereum_network_id }}
   - --syncmode=full
   - --state.scheme=path
+  - --eth.requiredblocks=23134136=0xf1b6badbbdf9ec7f1fab3247e3a39daa449a43752028485b3d387f6fa5f446aa
+
 geth_init_custom_network: false
 geth_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
 geth_container_pull: true
