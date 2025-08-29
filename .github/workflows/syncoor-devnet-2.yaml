@@ -154,6 +154,7 @@ jobs:
               "--Init.DiscoveryEnabled=true",
               "--Sync.PivotHash=0x77811bb477a5d40cc40b694fa7e6a3482772f2d045a91f725fe40b9215ef51b2",
               "--Sync.PivotNumber=23142646",
+              "--Sync.PivotTotalDifficulty=58750003716598352816469",
               "--Network.DiscoveryDns=dummy",
               "--Network.MaxActivePeers=0",
               "--Sync.FastSync=true",
