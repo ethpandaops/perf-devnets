@@ -23,7 +23,7 @@ on:
       el-image:
         description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
         required: false
-        default: '{"geth": "ethpandaops/geth:performance", "besu": "ethpandaops/besu:performance", "nethermind": "ethpandaops/nethermind:performance", "erigon": "ethpandaops/erigon:performance", "reth": "ethpandaops/reth:performance"}'
+        default: '{"geth": "ethpandaops/geth:performance", "besu": "ethpandaops/besu:performance", "nethermind": "ethpandaops/nethermind:performance", "erigon": "ethpandaops/erigon:performance", "reth": "ethpandaops/reth:CPerezz-cperezz-feat-shadowfork-peer-filtering"}'
         type: string
       cl-image:
         description: 'Consensus layer client images as JSON (e.g., {"lighthouse": "sigp/lighthouse:latest", "teku": "consensys/teku:latest"})'
@@ -164,8 +164,8 @@ jobs:
             ]' ||
             (matrix.el-client == 'reth') && '[
               "--full",
-              "--disable-discovery",
-              "--bootnodes=enode://d54f2c88dad80719c6f2be2c9925c6c2609f845ed84c9e2f961c2a7e67bfe218a657118a70a45d1b245e96e2678b0276ca2ca869d7aa5688fcb1a52381d6a1e3@157.180.14.230:30303"
+              "--bootnodes=enode://d54f2c88dad80719c6f2be2c9925c6c2609f845ed84c9e2f961c2a7e67bfe218a657118a70a45d1b245e96e2678b0276ca2ca869d7aa5688fcb1a52381d6a1e3@157.180.14.230:30303",
+              "--required-block-hashes=0x88b0d56cc14c5232cdf6238c7252ca953e505f2a44ee60374f2bafb18bf067bf"
             ]' ||
             ''
           }}
