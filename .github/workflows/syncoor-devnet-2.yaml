@@ -23,7 +23,7 @@ on:
       el-image:
         description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
         required: false
-        default: '{"geth": "ethpandaops/geth:performance", "besu": "ethpandaops/besu:performance", "nethermind": "ethpandaops/nethermind:performance", "erigon": "ethpandaops/erigon:performance", "reth": "ethpandaops/reth:performance"}'
+        default: '{"geth": "ethpandaops/geth:performance", "besu": "ethpandaops/besu:performance", "nethermind": "ethpandaops/nethermind:performance", "erigon": "ethpandaops/erigon:performance", "reth": "ethpandaops/reth:CPerezz-cperezz-feat-shadowfork-peer-filtering"}'
         type: string
       cl-image:
         description: 'Consensus layer client images as JSON (e.g., {"lighthouse": "sigp/lighthouse:latest", "teku": "consensys/teku:latest"})'
@@ -137,8 +137,7 @@ jobs:
         el-extra-args: >-
           ${{
             (matrix.el-client == 'besu') && '[
-              "--required-block=23115201=0x88b0d56cc14c5232cdf6238c7252ca953e505f2a44ee60374f2bafb18bf067bf",
-              "--bootnodes=enode://3ba5f46aa1a9d863de4ce5ff67ec46704c43b2a1d5100e272dbfec5e56b350113018d3e67c400f09db60d4ec55df025bd209802c67826717a33a48acbe13b305@157.180.14.226:30303"
+              "--required-block=23115201=0x88b0d56cc14c5232cdf6238c7252ca953e505f2a44ee60374f2bafb18bf067bf"
             ]' ||
             (matrix.el-client == 'erigon') && '[
               "--prune.mode=full",
@@ -147,8 +146,7 @@ jobs:
               "--bootnodes=enode://3ba5f46aa1a9d863de4ce5ff67ec46704c43b2a1d5100e272dbfec5e56b350113018d3e67c400f09db60d4ec55df025bd209802c67826717a33a48acbe13b305@157.180.14.226:30303"
             ]' ||
             (matrix.el-client == 'geth') && '[
-              "--eth.requiredblocks=23115201=0x88b0d56cc14c5232cdf6238c7252ca953e505f2a44ee60374f2bafb18bf067bf",
-              "--bootnodes=enode://3ba5f46aa1a9d863de4ce5ff67ec46704c43b2a1d5100e272dbfec5e56b350113018d3e67c400f09db60d4ec55df025bd209802c67826717a33a48acbe13b305@157.180.14.226:30303"
+              "--eth.requiredblocks=23115201=0x88b0d56cc14c5232cdf6238c7252ca953e505f2a44ee60374f2bafb18bf067bf"
             ]' ||
             (matrix.el-client == 'nethermind') && '[
               "--Init.DiscoveryEnabled=true",
@@ -163,9 +161,7 @@ jobs:
               "--Init.TrustedNodesPath=/data/trusted-nodes.json"
             ]' ||
             (matrix.el-client == 'reth') && '[
-              "--full",
-              "--disable-discovery",
-              "--bootnodes=enode://d54f2c88dad80719c6f2be2c9925c6c2609f845ed84c9e2f961c2a7e67bfe218a657118a70a45d1b245e96e2678b0276ca2ca869d7aa5688fcb1a52381d6a1e3@157.180.14.230:30303"
+              "--required-block-hashes=0x88b0d56cc14c5232cdf6238c7252ca953e505f2a44ee60374f2bafb18bf067bf"
             ]' ||
             ''
           }}
