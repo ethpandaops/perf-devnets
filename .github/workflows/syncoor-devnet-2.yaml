@@ -23,7 +23,7 @@ on:
       el-image:
         description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
         required: false
-        default: '{"geth": "ethpandaops/geth:performance", "besu": "ethpandaops/besu:performance", "nethermind": "ethpandaops/nethermind:performance", "erigon": "ethpandaops/erigon:performance", "reth": "ethpandaops/reth:CPerezz-cperezz-feat-shadowfork-peer-filtering"}'
+        default: '{"geth": "ethpandaops/geth:performance", "besu": "ethpandaops/besu:performance", "nethermind": "ethpandaops/nethermind:performance", "erigon": "ethpandaops/erigon:performance", "reth": "ethpandaops/reth:main"}'
         type: string
       cl-image:
         description: 'Consensus layer client images as JSON (e.g., {"lighthouse": "sigp/lighthouse:latest", "teku": "consensys/teku:latest"})'
@@ -134,6 +134,11 @@ jobs:
         cl-client: ${{ matrix.cl-client }}
         el-image: ${{ steps.parse-images.outputs.el-image }}
         cl-image: ${{ steps.parse-images.outputs.cl-image }}
+        ethereum-package: >-
+          ${{
+            matrix.el-client == 'reth' && 'github.com/ethpandaops/ethereum-package@reth-workaround-bootnodes' ||
+            'github.com/ethpandaops/ethereum-package@main'
+          }}
         el-extra-args: >-
           ${{
             (matrix.el-client == 'besu') && '[
@@ -161,6 +166,7 @@ jobs:
               "--Init.TrustedNodesPath=/data/trusted-nodes.json"
             ]' ||
             (matrix.el-client == 'reth') && '[
+              "--trusted-only",
               "--required-block-hashes=0x88b0d56cc14c5232cdf6238c7252ca953e505f2a44ee60374f2bafb18bf067bf"
             ]' ||
             ''
