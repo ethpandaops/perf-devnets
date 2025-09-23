@@ -139,6 +139,13 @@ jobs:
             matrix.el-client == 'reth' && 'github.com/ethpandaops/ethereum-package@reth-workaround-bootnodes' ||
             'github.com/ethpandaops/ethereum-package@main'
           }}
+        el-extra-env: >-
+          ${{
+            (matrix.el-client == 'erigon') && '[
+              "SNAPS_GIT_BRANCH=perfnet2_shadow_fork_main"
+            ]' ||
+            ''
+          }}
         el-extra-args: >-
           ${{
             (matrix.el-client == 'besu') && '[
