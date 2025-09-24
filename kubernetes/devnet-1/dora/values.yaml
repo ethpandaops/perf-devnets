@@ -39,6 +39,10 @@ dora:
       value: "true"
     - name: FRONTEND_SHOW_SUBMIT_EL_REQUESTS
       value: "true"
+    - name: API_ENABLED
+      value: "true"
+    - name: API_CORS_ORIGINS
+      value: "*"
   postgresql:
     name: "dora-postgresql"
     fullnameOverride: "dora-postgresql"
