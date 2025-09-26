@@ -1,0 +1,11 @@
+participants:
+  - el_type: reth
+    el_image: ethpandaops/reth:main
+    el_extra_params:
+      - "--required-block-hashes=0x88b0d56cc14c5232cdf6238c7252ca953e505f2a44ee60374f2bafb18bf067bf"
+    cl_type: lighthouse
+    cl_image: ethpandaops/lighthouse:unstable
+    validator_count: 0
+network_params:
+  network: "perf-devnet-2"
+persistent: true
