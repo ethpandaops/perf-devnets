@@ -113,6 +113,7 @@ bootstrap_default_user_authorized_keys_github_all:
   - matkt
   - mariusVanDerWijden
   - rjl493456442
+  - yongkangc
 
 bootstrap_default_user_authorized_keys_github: >
   {{
