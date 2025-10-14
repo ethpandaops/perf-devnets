@@ -20,12 +20,12 @@ geth_container_command_extra_args:
   - --http.vhosts=*
   - --networkid={{ ethereum_network_id }}
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
-  - --syncmode=full
   - --miner.gaslimit=1000000000
   - --txpool.globalqueue=10000
   - --txpool.globalslots=10000
   - --maxpeers=200
   - --eth.requiredblocks=23134136=0xf1b6badbbdf9ec7f1fab3247e3a39daa449a43752028485b3d387f6fa5f446aa
+  # - --syncmode=full
 
 geth_init_custom_network: false
 geth_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
