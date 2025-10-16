@@ -1,27 +1,5 @@
 ethereum_node_cl_checkpoint_sync_enabled: true
-erigon_container_command_extra_args:
-  - --http.api=eth,erigon,engine,web3,net,debug,trace,txpool,admin,ots
-  - --http.vhosts=*
-  - --ws
-  - --prune.mode=full
-  - --networkid={{ ethereum_network_id }}
-  - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
-  - --externalcl
-  - --miner.gaslimit=1000000000
-  - --txpool.globalslots=10000
-  - --log.console.verbosity=info
-  - --log.dir.verbosity=debug
-  - --pprof
-  - --pprof.addr=0.0.0.0
-  - --pprof.port=6060
-  - --torrent.download.rate=1gb
-  - --el.block.downloader.v2
-  - --p2p.protocol=68
-  - --maxpeers=200
-  - --prune.mode=full
-  - --ots.search.max.pagesize=50
-  - --http.corsdomain=*
-  - --shadowfork.block=22758966
+
 
 lighthouse_container_command_extra_args:
   - --testnet-dir=/network-config
