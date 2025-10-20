@@ -1,1 +1,23 @@
 ethereum_node_cl_beacon_endpoint: "https://{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}@bn.bootnode-1.{{ network_subdomain }}"
+nethermind_container_image: "nethermind/nethermind:1.35.0"
+nethermind_container_command_extra_args:
+  - --Init.ChainSpecPath=/network-config/chainspec.json
+  - --config=mainnet.cfg
+  #   - --Init.BaseDbPath=mainnet
+  - --JsonRpc.EnabledModules=Eth,Subscribe,Trace,TxPool,Web3,Personal,Proof,Net,Parity,Health,Rpc,Debug,Admin
+  - --Network.OnlyStaticPeers=true
+  - --Network.StaticPeers={{ ethereum_el_bootnodes | join(',') }}
+  - --Discovery.Bootnodes={{ ethereum_el_bootnodes | join(',') }}
+  - --Init.IsMining=false
+  - --Pruning.Mode=None
+  - --Seq.MinLevel=Info
+  - --Seq.ServerUrl={{ nethermind_seq_server }}
+  - --Seq.ApiKey={{ nethermind_seq_api_key }}
+  - --Metrics.PushGatewayUrl={{ nethermind_push_gateway }}
+  - --Blocks.TargetBlockGasLimit=1000000000
+  - --TxPool.Size=10000
+  - --log=INFO
+  # Pivot config
+  - --Sync.PivotHash=0x2db3477400537151f68c1b6496efb965c0caf0dc5c172b78d7c67eb8375b107e
+  - --Sync.PivotNumber=23447683
+  - --Sync.PivotTotalDifficulty=58750003716598352816469
