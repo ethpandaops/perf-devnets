@@ -1,4 +1,4 @@
-ethereum_node_cl_beacon_endpoint: "https://{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}@bn.bootnode-1.{{ network_subdomain }}"
+# ethereum_node_cl_beacon_endpoint: "https://{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}@bn.bootnode-1.{{ network_subdomain }}"
 nethermind_container_image: "nethermind/nethermind:1.35.0"
 nethermind_container_command_extra_args:
   - --Init.ChainSpecPath=/network-config/chainspec.json
