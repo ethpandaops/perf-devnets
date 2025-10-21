@@ -8,7 +8,6 @@ nethermind_container_command_extra_args:
   - --Network.OnlyStaticPeers=true
   - --Network.StaticPeers={{ ethereum_el_bootnodes | join(',') }}
   - --Discovery.Bootnodes={{ ethereum_el_bootnodes | join(',') }}
-  - --Init.IsMining=false
   - --Pruning.Mode=None
   - --Seq.MinLevel=Info
   - --Seq.ServerUrl={{ nethermind_seq_server }}
