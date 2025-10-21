@@ -32,7 +32,6 @@ nethermind_container_command_extra_args:
   - --Init.BaseDbPath=mainnet
   - --JsonRpc.EnabledModules=Eth,Subscribe,Trace,TxPool,Web3,Personal,Proof,Net,Parity,Health,Rpc,Debug,Admin
   - --Discovery.Bootnodes={{ ethereum_el_bootnodes | join(',') }}
-  - --Init.IsMining=false
   - --Pruning.Mode=None
   - --Seq.MinLevel=Info
   - --Seq.ServerUrl={{ nethermind_seq_server }}
