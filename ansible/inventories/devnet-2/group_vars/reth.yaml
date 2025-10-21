@@ -26,6 +26,7 @@ reth_container_command_extra_args:
   - --full
   - --builder.gaslimit=1000000000
   - --txpool.queued-max-count=10000
+  - --network-id={{ shadowfork_network_id }}
 prometheus_config: |
   global:
     scrape_interval: 30s

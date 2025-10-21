@@ -35,6 +35,7 @@ erigon_container_command_extra_args:
   - --pprof.port=6060
   - --torrent.download.rate=1gb
   - --p2p.protocol=68
+  - --networkid={{ shadowfork_network_id }}
 #   - --el.block.downloader.v2
 #   - --ots.search.max.pagesize=50
 #   - --http.corsdomain=*

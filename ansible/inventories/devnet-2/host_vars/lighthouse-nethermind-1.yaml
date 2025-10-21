@@ -1,5 +1,5 @@
 # ethereum_node_cl_beacon_endpoint: "https://{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}@bn.bootnode-1.{{ network_subdomain }}"
-nethermind_container_image: "nethermind/nethermind:1.35.0"
+nethermind_container_image: "nethermindeth/nethermind:performance"
 nethermind_container_command_extra_args:
   - --Init.ChainSpecPath=/network-config/chainspec.json
   - --config=mainnet.cfg
@@ -8,7 +8,6 @@ nethermind_container_command_extra_args:
   - --Network.OnlyStaticPeers=true
   - --Network.StaticPeers={{ ethereum_el_bootnodes | join(',') }}
   - --Discovery.Bootnodes={{ ethereum_el_bootnodes | join(',') }}
-  - --Init.IsMining=false
   - --Pruning.Mode=None
   - --Seq.MinLevel=Info
   - --Seq.ServerUrl={{ nethermind_seq_server }}
@@ -21,3 +20,4 @@ nethermind_container_command_extra_args:
   - --Sync.PivotHash=0x2db3477400537151f68c1b6496efb965c0caf0dc5c172b78d7c67eb8375b107e
   - --Sync.PivotNumber=23447683
   - --Sync.PivotTotalDifficulty=58750003716598352816469
+  - --Init.NetworkId={{ shadowfork_network_id }}
