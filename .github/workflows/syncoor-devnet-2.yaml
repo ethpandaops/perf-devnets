@@ -134,12 +134,7 @@ jobs:
         cl-client: ${{ matrix.cl-client }}
         el-image: ${{ steps.parse-images.outputs.el-image }}
         cl-image: ${{ steps.parse-images.outputs.cl-image }}
-        ethereum-package: >-
-          ${{
-            matrix.el-client == 'erigon' && 'github.com/ethpandaops/ethereum-package@static-nodes-workaround' ||
-            matrix.el-client == 'reth' && 'github.com/ethpandaops/ethereum-package@static-nodes-workaround' ||
-            'github.com/ethpandaops/ethereum-package@main'
-          }}
+        ethereum-package: github.com/ethpandaops/ethereum-package@main
         el-env-vars: >-
           ${{
             (matrix.el-client == 'erigon') && '[
