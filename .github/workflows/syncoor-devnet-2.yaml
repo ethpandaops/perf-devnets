@@ -158,6 +158,7 @@ jobs:
               "--Init.NetworkId=12159"
             ]' ||
             (matrix.el-client == 'reth') && '[
+              "--full",
               "--network-id=12159"
             ]' ||
             ''
