@@ -23,7 +23,7 @@ on:
       el-image:
         description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
         required: false
-        default: '{"geth": "ethpandaops/geth:performance", "besu": "ethpandaops/besu:performance", "nethermind": "ethpandaops/nethermind:performance", "erigon": "ethpandaops/erigon:performance", "reth": "ethpandaops/reth:performance"}'
+        default: '{"geth": "ethpandaops/geth:performance", "besu": "ethpandaops/besu:performance", "nethermind": "nethermindeth/nethermind:performance", "erigon": "ethpandaops/erigon:performance", "reth": "ethpandaops/reth:performance"}'
         type: string
       cl-image:
         description: 'Consensus layer client images as JSON (e.g., {"lighthouse": "sigp/lighthouse:latest", "teku": "consensys/teku:latest"})'
