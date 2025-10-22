@@ -34,7 +34,7 @@ besu_container_command_extra_args:
   - --sync-min-peers=1
   - --static-nodes-file=/network-config/static-nodes.json
   - --bonsai-limit-trie-logs-enabled=false
-  - --required-block=23115201=0x88b0d56cc14c5232cdf6238c7252ca953e505f2a44ee60374f2bafb18bf067bf
+  #- --required-block=23115201=0x88b0d56cc14c5232cdf6238c7252ca953e505f2a44ee60374f2bafb18bf067bf
   - --network-id={{ shadowfork_network_id }}
 besu_container_pull: true
 
