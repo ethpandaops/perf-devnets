@@ -23,12 +23,27 @@ on:
       el-image:
         description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
         required: false
-        default: '{"geth": "ethpandaops/geth:performance", "besu": "ethpandaops/besu:performance", "nethermind": "nethermindeth/nethermind:performance", "erigon": "ethpandaops/erigon:performance", "reth": "ethpandaops/reth:performance"}'
+        default: >-
+          {
+            "geth": "ethpandaops/geth:performance",
+            "besu": "ethpandaops/besu:performance",
+            "nethermind": "nethermindeth/nethermind:performance",
+            "erigon": "ethpandaops/erigon:performance",
+            "reth": "ethpandaops/reth:performance"
+          }
         type: string
       cl-image:
         description: 'Consensus layer client images as JSON (e.g., {"lighthouse": "sigp/lighthouse:latest", "teku": "consensys/teku:latest"})'
         required: false
-        default: '{"lighthouse": "ethpandaops/lighthouse:unstable", "teku": "ethpandaops/teku:master", "prysm": "ethpandaops/prysm-beacon-chain:develop", "nimbus": "ethpandaops/nimbus-eth2:unstable", "lodestar": "ethpandaops/lodestar:latest", "grandine": "ethpandaops/grandine:latest"}'
+        default: >-
+          {
+            "lighthouse": "ethpandaops/lighthouse:unstable",
+            "teku": "ethpandaops/teku:master",
+            "prysm": "ethpandaops/prysm-beacon-chain:develop",
+            "nimbus": "ethpandaops/nimbus-eth2:unstable",
+            "lodestar": "ethpandaops/lodestar:latest",
+            "grandine": "ethpandaops/grandine:latest"
+          }
         type: string
       log-level-cl:
         description: 'Log level for consensus layer clients (debug, info, warn, error)'
