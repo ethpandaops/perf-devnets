@@ -36,6 +36,7 @@ erigon_container_command_extra_args:
   - --torrent.download.rate=1gb
   - --p2p.protocol=68
   - --maxpeers=200
+  - --networkid={{ shadowfork_network_id }}
   # - --el.block.downloader.v2
 erigon_init_custom_network: true
 erigon_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"

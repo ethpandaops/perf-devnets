@@ -41,6 +41,7 @@ nethermind_container_command_extra_args:
   - --TxPool.Size=10000
   - --Network.MaxActivePeers=200
   - --log=INFO
+  - --Init.NetworkId={{ shadowfork_network_id }}
 nethermind_container_pull: true
 
 prometheus_config: |
