@@ -21,7 +21,7 @@ ethereum_node_beacon_hostname: "bn.{{ server_fqdn }}"
 
 
 snapshot_fetcher_network: mainnet
-shadowfork_network_id: 12159
+shadowfork_network_id: 12158
 
 ### Checkpoint sync specific for Ansible & Kubernetes
 checkpoint_sync_node: lighthouse-nethermind-1
