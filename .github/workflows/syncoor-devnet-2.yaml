@@ -170,7 +170,9 @@ jobs:
               "--networkid=12159"
             ]' ||
             (matrix.el-client == 'nethermind') && '[
-              "--Init.NetworkId=12159"
+              "--Init.NetworkId=12159",
+              "--Sync.FastSync=true",
+              "--Sync.SnapsSync=true"
             ]' ||
             (matrix.el-client == 'reth') && '[
               "--full",
