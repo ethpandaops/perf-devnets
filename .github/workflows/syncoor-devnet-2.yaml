@@ -172,7 +172,7 @@ jobs:
             (matrix.el-client == 'nethermind') && '[
               "--Init.NetworkId=12159",
               "--Sync.FastSync=true",
-              "--Sync.SnapsSync=true"
+              "--Sync.SnapSync=true"
             ]' ||
             (matrix.el-client == 'reth') && '[
               "--full",
