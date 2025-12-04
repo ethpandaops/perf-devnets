@@ -36,6 +36,9 @@ besu_container_command_extra_args:
   - --bonsai-limit-trie-logs-enabled=false
   #- --required-block=23115201=0x88b0d56cc14c5232cdf6238c7252ca953e505f2a44ee60374f2bafb18bf067bf
   - --network-id={{ shadowfork_network_id }}
+  - --cache-last-block-headers-preload-enabled=true
+  - --cache-last-block-headers=15000
+  - --Xplugin-rocksdb-high-spec-enabled=true
 besu_container_pull: true
 
 prometheus_config: |
