@@ -22,6 +22,7 @@ reth_container_volumes:
   - "{{ reth_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
 reth_container_command_extra_args:
+  - --chain=/network-config/genesis.json
   - --trusted-peers={{ ethereum_el_bootnodes | join(',') }}
   - --http.api=trace,rpc,eth,net,debug,web3,admin
   - --full
