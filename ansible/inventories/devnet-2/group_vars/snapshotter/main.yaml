@@ -54,6 +54,15 @@ snapshotter_ssh_known_hosts: |
   |1|7vpt7zT5HFGjEOE5SchF5bg1EL4=|ADtLXdnQV+cwtu3nDXRwD15Z0xc= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2d6mXvodhrXnBXKDr7nOrkUfISeDZ+jU4sB7Y3XkMy
   # 157.180.14.228:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
   # 157.180.14.228:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u3
+  # 206.189.58.47:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u7
+  |1|WwEpgpyj5SKnGKK/Hy2pYM81X2U=|eHvtniqTJUBONzh+YozoKZUUDI4= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMeTZ53CCDzea8+FgP/oozXDkLYIi+w1ZkXet7saF13y
+  # 206.189.58.47:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u7
+  # 206.189.58.47:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u7
+  |1|KWX/23GXoXanAzDKm8fefieGwno=|hnJnas+muvPG7bEzDkLdRCEZd7w= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCa+C6RiaDRk0Z0rabZmkN5QLEq7r6QOrhdwssgHt6Tq636eX1q2Z9MMjzunmXb/pr9J5J2d7PT1CXKoy1m2xyA2dsUfLS+p7tUpVlyW7Ij3pHXtD3OxGNio2suZLlIw/fJKUOXDmCcMiS9kxSlffoIsJ4N9Tj1/VlehkA7nfpBfgAI8w7Yspa8FKXheGDfaS6lfMMSg0DiKX3z02r5/6Xds4EYtC/PsFLTGbRtf5wgvHxp1BkycK323lVHkEUtq3yX3l8BQrM/TewA4UssZQ5Rv9nqxDd/98JpCqEOE7Oi5LirdKf6RyqQJBAglGXvdEBO83VVSVsellmPuDweL+ZsHJBqjkrZdHv5sStT310qpuztq5BPPanUU/r3ZDlxnyXRzO/KqaKYaeE6fwAxw/OU845mfheeALophBpsgLh/JnEudDTql2BKP3vS1MUwDGKZWINofrvdObYRNHD4zjvZduKUL2X1KMi7lAgMPkSJl/Qq4UoFcLJVPaEObOJ04Xs=
+  # 206.189.58.47:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u7
+  |1|sTvgP5DfZqB13MCH9gKo+wAVqHo=|J7YSWpXU7JIS2KUi75ccYaXgCCc= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPzbrWS87nYcT2RJDgagXzncqsQWk4FRv6UrxAIcr9OlRSY2l139A3oqK/BJvUdv1uK/SxVx3jbI2wXS1GCFN5w=
+  # 206.189.58.47:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u7
+  
 
 snapshotter_config: |
   server:
@@ -72,7 +81,7 @@ snapshotter_config: |
       use_agent: false
     snapshots:
       check_interval_seconds: 1
-      block_interval: 22923350
+      block_interval: 23861500
       run_once: false
       s3:
         bucket_name: "ethpandaops-ethereum-node-snapshots"
@@ -93,7 +102,7 @@ snapshotter_config: |
   targets:
     ssh:
       - alias: "geth"
-        host: "{{ hostvars[groups['geth'][0]].ansible_host }}"
+        host: "{{ hostvars[groups['geth'][1]].ansible_host }}"
         user: "devops"
         port: 22
         data_dir: /data/geth/geth
