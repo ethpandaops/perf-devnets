@@ -90,9 +90,10 @@ ethereum_node_docker_watchtower_containers_list:
   - execution
   - beacon
   - validator
+docker_watchtower_container_image: "skylenet/watchtower:auto-detect-stop-timeout"
 docker_watchtower_container_additional_args:
   - --interval=120 # 2 minutes
-  - --stop-timeout=300s # 5 minutes
+  - --stop-timeout=290s # 5 minutes
 
 ethereum_node_grafana_alloy_enabled: true
 alloy_pyroscope_server_endpoint: "{{ secret_pyroscope.endpoint }}"
