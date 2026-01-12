@@ -16,6 +16,12 @@ spamoor:
   ingress:
     enabled: true
     className: ingress-nginx-public
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.0.js" integrity="sha384-j6D+DanVUQs7XYmJaMXGwg2VdBq07F/ekc+bP5CNPsLOYCv4TKf8r3JBWqxwakKL" crossorigin="anonymous"></script></head>';
+        sub_filter_types text/html;
+        sub_filter_once off;
     hosts:
       - host: spamoor.perf-devnet-2.ethpandaops.io
         paths:
@@ -30,9 +36,10 @@ spamoor:
   rpcEndpoints:
   # Rpc
   - "http://geth-prysm-001:8545"
-  - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.bootnode-1.perf-devnet-2.ethpandaops.io"
-  - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-nethermind-1.perf-devnet-2.ethpandaops.io"
-  - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-reth-1.perf-devnet-2.ethpandaops.io"
-  - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.nimbus-besu-1.perf-devnet-2.ethpandaops.io"
-  - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.prysm-geth-1.perf-devnet-2.ethpandaops.io"
-  - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.teku-erigon-1.perf-devnet-2.ethpandaops.io"
+  - "group(bootnode-1)name(bootnode-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.bootnode-1.perf-devnet-2.ethpandaops.io"
+  - "group(lighthouse-geth-1)name(lighthouse-geth-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-geth-1.perf-devnet-2.ethpandaops.io"
+  - "group(lighthouse-nethermind-1)name(lighthouse-nethermind-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-nethermind-1.perf-devnet-2.ethpandaops.io"
+  - "group(lighthouse-reth-1)name(lighthouse-reth-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-reth-1.perf-devnet-2.ethpandaops.io"
+  - "group(nimbus-besu-1)name(nimbus-besu-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.nimbus-besu-1.perf-devnet-2.ethpandaops.io"
+  - "group(prysm-geth-1)name(prysm-geth-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.prysm-geth-1.perf-devnet-2.ethpandaops.io"
+  - "group(teku-erigon-1)name(teku-erigon-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.teku-erigon-1.perf-devnet-2.ethpandaops.io"

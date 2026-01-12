@@ -8,6 +8,8 @@
 domain: ethpandaops.io
 network_subdomain: "{{ ethereum_network_name }}.{{ domain }}"
 server_fqdn: "{{ inventory_hostname }}.{{ network_subdomain }}"
+network_server_subdomain: "{{ network_subdomain }}"
+network_iteration: "{{ ethereum_network_name.split('-')[1:] | join('-') }}"
 
 ethereum_network_id: >-
   {{ (lookup('file', eth_testnet_config_local_dir_src + '/genesis.json') | from_json).config.chainId }}
@@ -16,9 +18,10 @@ ethereum_network_deposit_contract: >-
 ethereum_network_deposit_contract_block: >-
   {{ lookup('file', eth_testnet_config_local_dir_src + '/deposit_contract_block.txt') }}
 
+ethereum_node_rpc_prefix: "rpc."
 ethereum_node_rcp_hostname: "rpc.{{ server_fqdn }}"
+ethereum_node_beacon_prefix: "bn."
 ethereum_node_beacon_hostname: "bn.{{ server_fqdn }}"
-
 
 snapshot_fetcher_network: perf-devnet-2
 snapshot_fetcher_client: geth
@@ -149,6 +152,13 @@ ethereum_node_json_rpc_snooper_engine_enabled: true
 ethereum_node_json_rpc_snooper_engine_port: 8561
 ethereum_node_json_rpc_snooper_engine_name: "snooper-engine"
 
+# role: ethpandaops.general.generate_kubernetes_config
+gen_kubernetes_config_dora_execution_snooper_port: 8961
+gen_kubernetes_config_dora_frontend_rainbowkit_id: "15fe4ab4d5c0bcb6f0dc7c398301ff0e"
+gen_kubernetes_config_dora_execution_endpoints_url: "https://raw.githubusercontent.com/ethpandaops/perf-devnets/refs/heads/master/kubernetes/{{ network_iteration }}/dora/endpoints-el.yaml"
+gen_kubernetes_config_dora_consensus_endpoints_url: "https://raw.githubusercontent.com/ethpandaops/perf-devnets/refs/heads/master/kubernetes/{{ network_iteration }}/dora/endpoints-cl.yaml"
+gen_kubernetes_config_dora_api_secret: "{{ secret_dora_api_key }}"
+
 # role: ethpandaops.general.xatu_sentry
 xatu_sentry_container_image: "{{ default_tooling_images.xatu_sentry }}"
 xatu_sentry_config_name: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
@@ -159,9 +169,6 @@ xatu_sentry_config_network_name_override: "{{ ethereum_network_name }}"
 
 # role: ethpandaops.general.ethereum_metrics_exporter
 ethereum_metrics_exporter_container_image: "{{ default_tooling_images.ethereum_metrics_exporter }}"
-
-# role: ethpandaops.general.generate_kubernetes_config
-gen_kubernetes_config_dora_execution_snooper_port: 8961
 
 # role: eth_testnet_config
 eth_testnet_config_dir: /data/ethereum-network-config/metadata

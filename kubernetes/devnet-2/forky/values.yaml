@@ -17,6 +17,12 @@ forky:
   ingress:
     enabled: true
     className: ingress-nginx-public
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.0.js" integrity="sha384-j6D+DanVUQs7XYmJaMXGwg2VdBq07F/ekc+bP5CNPsLOYCv4TKf8r3JBWqxwakKL" crossorigin="anonymous"></script></head>';
+        sub_filter_types text/html;
+        sub_filter_once off;
     hosts:
       - host: forky.perf-devnet-2.ethpandaops.io
         paths:
@@ -26,6 +32,10 @@ forky:
   postgresql:
     enabled: true
     fullnameOverride: "forky-postgresql"
+    image:
+      registry: docker.io
+      repository: bitnamilegacy/postgresql
+      tag: 16.4.0-debian-12-r2
     auth:
       username: <path:/secrets/services/services.enc.yaml#forky | jsonPath {.postgres.devnets.username}>
       password: <path:/secrets/services/services.enc.yaml#forky | jsonPath {.postgres.devnets.password}>
@@ -71,6 +81,11 @@ forky:
           type: "beacon_node"
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.bootnode-1.perf-devnet-2.ethpandaops.io
+            polling_interval: "12s"
+        - name: lighthouse-geth-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-geth-1.perf-devnet-2.ethpandaops.io
             polling_interval: "12s"
         - name: lighthouse-nethermind-1
           type: "beacon_node"

@@ -16,6 +16,12 @@ tracoor-single:
     http:
       enabled: true
       className: ingress-nginx-public
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        nginx.ingress.kubernetes.io/configuration-snippet: |
+          sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.0.js" integrity="sha384-j6D+DanVUQs7XYmJaMXGwg2VdBq07F/ekc+bP5CNPsLOYCv4TKf8r3JBWqxwakKL" crossorigin="anonymous"></script></head>';
+          sub_filter_types text/html;
+          sub_filter_once off;
       hosts:
         - host: tracoor.perf-devnet-2.ethpandaops.io
           paths:
@@ -25,6 +31,10 @@ tracoor-single:
   postgresql:
     enabled: true
     fullnameOverride: "tracoor-postgresql"
+    image:
+      registry: docker.io
+      repository: bitnamilegacy/postgresql
+      tag: 16.4.0-debian-12-r2
     auth:
       username: <path:/secrets/services/services.enc.yaml#tracoor | jsonPath {.postgres.devnets.username}>
       password: <path:/secrets/services/services.enc.yaml#tracoor | jsonPath {.postgres.devnets.password}>
@@ -95,6 +105,16 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: lighthouse-geth-1
+        ethereum:
+          overrideNetworkName: perf-devnet-2
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-geth-1.perf-devnet-2.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-geth-1.perf-devnet-2.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: lighthouse-nethermind-1
         ethereum:
           overrideNetworkName: perf-devnet-2
@@ -122,6 +142,16 @@ tracoor-single:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.nimbus-besu-1.perf-devnet-2.ethpandaops.io
           execution:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.nimbus-besu-1.perf-devnet-2.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: prysm-geth-1
+        ethereum:
+          overrideNetworkName: perf-devnet-2
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.prysm-geth-1.perf-devnet-2.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.prysm-geth-1.perf-devnet-2.ethpandaops.io
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true

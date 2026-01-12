@@ -96,8 +96,10 @@ erpc:
             - "eth_blockNumber"
             - "eth_call"
             - "eth_chainId"
+            - "eth_config"
             - "eth_estimateGas"
             - "eth_feeHistory"
+            - "eth_blobBaseFee"
             - "eth_gasPrice"
             - "eth_getBalance"
             - "eth_getBlockByHash"
@@ -132,6 +134,7 @@ erpc:
             - "trace_block"
         upstreams:
           - endpoint: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.bootnode-1.perf-devnet-2.ethpandaops.io
+          - endpoint: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-geth-1.perf-devnet-2.ethpandaops.io
           - endpoint: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-nethermind-1.perf-devnet-2.ethpandaops.io
           - endpoint: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-reth-1.perf-devnet-2.ethpandaops.io
           - endpoint: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.nimbus-besu-1.perf-devnet-2.ethpandaops.io

@@ -11,11 +11,17 @@ dora:
       cpu: 500m
       memory: 1Gi
     limits:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 1500m
+      memory: 3Gi
   ingress:
     enabled: true
     className: ingress-nginx-public
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.0.js" integrity="sha384-j6D+DanVUQs7XYmJaMXGwg2VdBq07F/ekc+bP5CNPsLOYCv4TKf8r3JBWqxwakKL" crossorigin="anonymous"></script></head>';
+        sub_filter_types text/html;
+        sub_filter_once off;
     hosts:
       - host: dora.perf-devnet-2.ethpandaops.io
         paths:
@@ -25,20 +31,27 @@ dora:
   name: perf-devnet-2
   configPath: "https://config.perf-devnet-2.ethpandaops.io/cl/config.yaml"
   validatorNamesInventory: "https://config.perf-devnet-2.ethpandaops.io/api/v1/nodes/validator-ranges"
+  ethExplorerLink: "https://explorer.perf-devnet-2.ethpandaops.io"
+  publicRpcUrl: "https://rpc.perf-devnet-2.ethpandaops.io"
+  rainbowkitProjectId: "15fe4ab4d5c0bcb6f0dc7c398301ff0e"
+  executionGenesisConfig: "https://config.perf-devnet-2.ethpandaops.io/el/genesis.json"
+  apiRequireAuth: False
+  apiAuthSecret: "<path:/secrets/services/services.enc.yaml#dora | jsonPath {.api_secret}>"
+  apiWhitelistedIPs: []
+  apiDefaultRateLimit: 60
+  apiDisableDefaultRateLimit: false
   proxyCount: 2
+  executionIndexerEnabled: False
+  executionIndexerRetention: 336h
   extraEnv:
     - name: FRONTEND_PPROF
       value: "true"
     - name: FRONTEND_SHOW_SENSITIVE_PEER_INFOS
       value: "true"
-    - name: API_ENABLED
-      value: "true"
     - name: API_CORS_ORIGINS
       value: "*"
-    - name: FRONTEND_ETH_EXPLORER_LINK
-      value: "https://explorer.perf-devnet-2.ethpandaops.io"
-    - name: FRONTEND_PUBLIC_RPC_URL
-      value: "https://rpc.perf-devnet-2.ethpandaops.io"
+    - name: FRONTEND_ENABLE_DAS_GUARDIAN_MASS_SCAN
+      value: "true"
     - name: FRONTEND_SHOW_SUBMIT_DEPOSIT
       value: "true"
     - name: FRONTEND_SHOW_SUBMIT_EL_REQUESTS
@@ -46,66 +59,19 @@ dora:
   postgresql:
     name: "dora-postgresql"
     fullnameOverride: "dora-postgresql"
+    persistence:
+      size: "10Gi"
 
-  endpoints:
-  # Rpc
-  - url: http://prysm-geth-001:5052
-    name: rpc-prysm-geth-001
-    archive: true
-    priority: 1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.bootnode-1.perf-devnet-2.ethpandaops.io
-    name: bootnode-1
-    priority: -1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-nethermind-1.perf-devnet-2.ethpandaops.io
-    name: lighthouse-nethermind-1
-    priority: -1
-    archive: true
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-reth-1.perf-devnet-2.ethpandaops.io
-    name: lighthouse-reth-1
-    priority: -1
-    archive: true
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.nimbus-besu-1.perf-devnet-2.ethpandaops.io
-    name: nimbus-besu-1
-    priority: -1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.prysm-geth-1.perf-devnet-2.ethpandaops.io
-    name: prysm-geth-1
-    priority: -1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.teku-erigon-1.perf-devnet-2.ethpandaops.io
-    name: teku-erigon-1
-    priority: -1
-  executionEndpoints:
-  # Rpc
-  - url: http://geth-prysm-001:8545
-    name: rpc-prysm-geth-001
-    archive: true
-    priority: 1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.bootnode-1.perf-devnet-2.ethpandaops.io
-    name: bootnode-1
-    priority: -1
-    archive: false
-    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.bootnode-1.perf-devnet-2.ethpandaops.io:8961
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-nethermind-1.perf-devnet-2.ethpandaops.io
-    name: lighthouse-nethermind-1
-    priority: -1
-    archive: false
-    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-nethermind-1.perf-devnet-2.ethpandaops.io:8961
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-reth-1.perf-devnet-2.ethpandaops.io
-    name: lighthouse-reth-1
-    priority: -1
-    archive: false
-    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-reth-1.perf-devnet-2.ethpandaops.io:8961
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.nimbus-besu-1.perf-devnet-2.ethpandaops.io
-    name: nimbus-besu-1
-    priority: -1
-    archive: false
-    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.nimbus-besu-1.perf-devnet-2.ethpandaops.io:8961
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.prysm-geth-1.perf-devnet-2.ethpandaops.io
-    name: prysm-geth-1
-    priority: -1
-    archive: false
-    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.prysm-geth-1.perf-devnet-2.ethpandaops.io:8961
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.teku-erigon-1.perf-devnet-2.ethpandaops.io
-    name: teku-erigon-1
-    priority: -1
-    archive: false
-    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.teku-erigon-1.perf-devnet-2.ethpandaops.io:8961
+  mevRelays:
+    - index: 0
+      name: "Flashbots"
+      url: "http://mev-relay-1.perf-devnet-2.ethpandaops.io:9062/"
+
+  authGroups:
+    pandaops:
+      credentials:
+        username: ""
+        password: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>"
+
+  endpointsUrl: "https://raw.githubusercontent.com/ethpandaops/perf-devnets/refs/heads/master/kubernetes/devnet-2/dora/endpoints-cl.yaml"
+  executionEndpointsUrl: "https://raw.githubusercontent.com/ethpandaops/perf-devnets/refs/heads/master/kubernetes/devnet-2/dora/endpoints-el.yaml"

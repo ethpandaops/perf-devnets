@@ -20,6 +20,11 @@ assertoor:
     className: ingress-nginx-public
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-production
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.0.js" integrity="sha384-j6D+DanVUQs7XYmJaMXGwg2VdBq07F/ekc+bP5CNPsLOYCv4TKf8r3JBWqxwakKL" crossorigin="anonymous"></script></head>';
+        sub_filter_types text/html;
+        sub_filter_once off;
     hosts:
       - host: assertoor.perf-devnet-2.ethpandaops.io
         paths:
@@ -44,6 +49,9 @@ assertoor:
     - name:  bootnode-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.bootnode-1.perf-devnet-2.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.bootnode-1.perf-devnet-2.ethpandaops.io
+    - name:  lighthouse-geth-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-geth-1.perf-devnet-2.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-geth-1.perf-devnet-2.ethpandaops.io
     - name:  lighthouse-nethermind-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-nethermind-1.perf-devnet-2.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-nethermind-1.perf-devnet-2.ethpandaops.io
@@ -65,15 +73,15 @@ assertoor:
     walletPrivkey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.assertoor_private_key}>"
     clientPairNames:
       - bootnode-1
+      - lighthouse-geth-1
       - lighthouse-nethermind-1
       - lighthouse-reth-1
       - nimbus-besu-1
       - prysm-geth-1
       - teku-erigon-1
     validatorPairNames:
+      - lighthouse-geth-1
       - lighthouse-reth-1
-      - nimbus-besu-1
-      - prysm-geth-1
       - teku-erigon-1
 
   assertoorTests: []
