@@ -90,6 +90,8 @@ ethereum_node_docker_watchtower_containers_list:
   - execution
   - beacon
   - validator
+# TODO: Remove this container_image once there's a release > v1.13.1 (By default it will use latest)
+#      We're using latest-dev mainly due to https://github.com/nicholas-fedor/watchtower/pull/1182
 docker_watchtower_container_image: "ghcr.io/nicholas-fedor/watchtower:latest-dev"
 docker_watchtower_container_additional_args:
   - --interval=120 # 2 minutes
