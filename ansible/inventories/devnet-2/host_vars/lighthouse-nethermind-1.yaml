@@ -22,7 +22,7 @@ nethermind_container_command_extra_args:
   - --Sync.PivotTotalDifficulty=58750003716598352816469
   - --Init.NetworkId={{ shadowfork_network_id }}
   # Flat DB flags
-  - --FlatDb.Enabled=true
-  - --FlatDb.ImportFromPruningTrieState=true
+  #- --FlatDb.Enabled=true
+  #- --FlatDb.ImportFromPruningTrieState=true
 
 # ethereum_node_cl_beacon_endpoint: "https://{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}@bn.bootnode-1.{{ network_subdomain }}"
