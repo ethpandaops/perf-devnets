@@ -37,7 +37,7 @@ erigon_container_command_extra_args:
   - --torrent.download.rate=1gb
   - --p2p.protocol=68
   - --networkid={{ shadowfork_network_id }}
-  - --sync.loop.block.limit=1024
+  - --sync.loop.block.limit=512
 #   - --el.block.downloader.v2
 #   - --ots.search.max.pagesize=50
 #   - --http.corsdomain=*
