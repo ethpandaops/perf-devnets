@@ -52,7 +52,7 @@
         "target": 14,
         "max": 21,
         "baseFeeUpdateFraction": 11684671
-      },
+      }
     }
   },
   "nonce": "0x42",
