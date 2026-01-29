@@ -118,6 +118,7 @@ bootstrap_default_user_authorized_keys_github_all:
   - rjl493456442
   - yongkangc
   - jrhea
+  - gballet
 
 bootstrap_default_user_authorized_keys_github: >
   {{
