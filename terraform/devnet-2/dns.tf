@@ -13,6 +13,10 @@ locals {
       ipv4 = "157.180.14.229"
       ipv6 = "2a01:4f9:3100:37a3::2"
     }
+    "lighthouse-geth-1" = {
+      ipv4 = "206.189.58.47"
+      ipv6 = "2a03:b0c0:3:f0:0:1:6f7d:9000"
+    }
     "lighthouse-nethermind-1" = {
       ipv4 = "157.180.14.230"
       ipv6 = "2a01:4f9:3100:37aa::2"

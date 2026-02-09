@@ -186,6 +186,7 @@ docker_nginx_proxy_acme_companion_container_image: "{{ default_tooling_images.ng
 
 # role: ethpandaops.general.docker_nginx_proxy
 docker_nginx_proxy_container_name: nginx-proxy
+docker_nginx_proxy_wildcard_enabled: false
 docker_nginx_proxy_default_email: "certs@{{ domain }}"
 docker_nginx_proxy_docker_gen_container_name: nginx-proxy-gen
 docker_nginx_proxy_docker_gen_container_env:
