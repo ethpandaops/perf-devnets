@@ -20,6 +20,7 @@ geth_container_command_extra_args:
   - --http.vhosts=*
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
 #   - --syncmode=full
+  - --cache=4096
   - --miner.gaslimit=1000000000
   - --txpool.globalqueue=10000
   - --txpool.globalslots=10000

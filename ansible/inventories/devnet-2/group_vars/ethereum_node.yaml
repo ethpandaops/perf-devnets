@@ -8,7 +8,7 @@ ethereum_el_bootnodes:
   - "{{ hostvars['bootnode-1']['ethereum_node_fact_el_enode'] }}"
   - "{{ hostvars['lighthouse-geth-1']['ethereum_node_fact_el_enode'] }}"
   - "{{ hostvars['prysm-geth-1']['ethereum_node_fact_el_enode'] }}"
-  - "{{ hostvars['lighthouse-nethermind-1']['ethereum_node_fact_el_enode'] }}"
+  #- "{{ hostvars['lighthouse-nethermind-1']['ethereum_node_fact_el_enode'] }}"
   - "{{ hostvars['nimbus-besu-1']['ethereum_node_fact_el_enode'] }}"
   - "enode://292d8de2de3977c2a4c136a66e81da3896cea872a3b95451d4aa1737654e39dfea0ff1d060a0fba780d7bb7b16518202d0609a2756775bc633d0d5d95d5f6bb3@135.125.119.2:60303"
 
