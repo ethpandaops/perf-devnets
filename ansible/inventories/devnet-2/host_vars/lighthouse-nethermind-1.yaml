@@ -24,7 +24,7 @@ nethermind_container_command_extra_args:
   - --Sync.PivotTotalDifficulty=58750003716598352816469
   - --Init.NetworkId={{ shadowfork_network_id }}
   # Flat DB flags
-  - --FlatDb.Enabled=true
+  - --FlatDb.Enabled=false
   - --FlatDb.ImportFromPruningTrieState=true
   - --Metrics.EnableDetailedMetric=true
 
