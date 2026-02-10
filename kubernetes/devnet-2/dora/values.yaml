@@ -41,8 +41,12 @@ dora:
   apiDefaultRateLimit: 60
   apiDisableDefaultRateLimit: false
   proxyCount: 2
-  executionIndexerEnabled: False
+  executionIndexerEnabled: True
   executionIndexerRetention: 336h
+  tracoorUrl: "https://tracoor.perf-devnet-2.ethpandaops.io"
+  tracoorNetwork: "perf-devnet-2"
+
+  
   extraEnv:
     - name: FRONTEND_PPROF
       value: "true"
@@ -52,15 +56,11 @@ dora:
       value: "*"
     - name: FRONTEND_ENABLE_DAS_GUARDIAN_MASS_SCAN
       value: "true"
-    - name: FRONTEND_SHOW_SUBMIT_DEPOSIT
-      value: "true"
-    - name: FRONTEND_SHOW_SUBMIT_EL_REQUESTS
-      value: "true"
   postgresql:
     name: "dora-postgresql"
     fullnameOverride: "dora-postgresql"
     persistence:
-      size: "10Gi"
+      size: "50Gi"
 
   mevRelays:
     - index: 0
