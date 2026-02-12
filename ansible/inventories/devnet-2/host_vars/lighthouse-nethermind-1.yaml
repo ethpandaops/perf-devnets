@@ -25,6 +25,7 @@ nethermind_container_command_extra_args:
   - --Init.NetworkId={{ shadowfork_network_id }}
   # Flat DB flags
   - --FlatDb.Enabled=true
+  - --FlatDb.MaxReorgDepth=192
   - --FlatDb.ImportFromPruningTrieState=true
   - --Metrics.EnableDetailedMetric=true
 
