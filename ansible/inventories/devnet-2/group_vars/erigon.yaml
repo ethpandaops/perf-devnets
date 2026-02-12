@@ -24,7 +24,7 @@ erigon_container_command_extra_args:
   - --http.vhosts=*
   - --ws
   - --prune.mode=full
-  - --networkid={{ ethereum_network_id }}
+  - --chain=bloatnet
   - --trustedpeers={{ ethereum_el_bootnodes | join(',') }}
   - --externalcl
   - --miner.gaslimit=1000000000
@@ -35,10 +35,6 @@ erigon_container_command_extra_args:
   - --pprof.addr=0.0.0.0
   - --pprof.port=6060
   - --torrent.download.rate=1gb
-  - --p2p.protocol=68
-  - --networkid={{ shadowfork_network_id }}
-  - --sync.loop.block.limit=512
-#   - --el.block.downloader.v2
 #   - --ots.search.max.pagesize=50
 #   - --http.corsdomain=*
 #   - --http.api=eth,erigon,engine,web3,net,debug,trace,txpool,admin,ots
