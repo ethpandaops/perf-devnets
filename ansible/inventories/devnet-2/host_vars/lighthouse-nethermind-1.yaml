@@ -15,7 +15,7 @@ nethermind_container_command_extra_args:
   - --Seq.ServerUrl={{ nethermind_seq_server }}
   - --Seq.ApiKey={{ nethermind_seq_api_key }}
   - --Metrics.PushGatewayUrl={{ nethermind_push_gateway }}
-  - --Blocks.TargetBlockGasLimit=1000000000
+  - --Blocks.TargetBlockGasLimit=5000000000
   - --TxPool.Size=10000
   - --log=INFO
   # Pivot config

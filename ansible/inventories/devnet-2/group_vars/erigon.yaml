@@ -26,7 +26,7 @@ erigon_container_command_extra_args:
   - --chain=bloatnet
   - --trustedpeers={{ ethereum_el_bootnodes | join(',') }}
   - --externalcl
-  - --miner.gaslimit=1000000000
+  - --miner.gaslimit=5000000000
   - --txpool.globalslots=10000
   - --log.console.verbosity=info
   - --log.dir.verbosity=debug

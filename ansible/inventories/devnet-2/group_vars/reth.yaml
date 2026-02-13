@@ -27,7 +27,7 @@ reth_container_command_extra_args:
   - --trusted-peers={{ ethereum_el_bootnodes | join(',') }}
   - --http.api=trace,rpc,eth,net,debug,web3,admin
   - --full
-  - --builder.gaslimit=1000000000
+  - --builder.gaslimit=5000000000
   - --txpool.queued-max-count=10000
   - --network-id={{ shadowfork_network_id }}
 prometheus_config: |
