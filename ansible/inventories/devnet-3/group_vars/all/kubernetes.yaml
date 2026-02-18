@@ -1,0 +1,7 @@
+# Kubernetes config generation overrides
+# role: ethpandaops.general.generate_kubernetes_config
+
+gen_kubernetes_config_disabled_services:
+  - prysm-geth-001
+  - blockscout
+  - faucet

@@ -25,7 +25,7 @@ ethereum_node_beacon_hostname: "bn.{{ server_fqdn }}"
 
 snapshot_fetcher_network: perf-devnet-3
 snapshot_fetcher_client: geth
-snapshot_fetcher_block: 22811744
+#snapshot_fetcher_block: 22811744
 shadowfork_network_id: 12159
 
 ### Checkpoint sync specific for Ansible & Kubernetes
