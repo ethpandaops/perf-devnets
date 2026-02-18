@@ -1,0 +1,138 @@
+ethereum_cl_bootnodes:
+  - "{{ hostvars['bootnode-1']['cl_bootnode_fact_enr'] }}"
+  - "{{ hostvars['bootnode-1']['ethereum_node_fact_cl_enr'] }}"
+  - "{{ hostvars['prysm-geth-1']['ethereum_node_fact_cl_enr'] }}"
+
+
+ethereum_el_bootnodes:
+  - "{{ hostvars['bootnode-1']['ethereum_node_fact_el_enode'] }}"
+  - "{{ hostvars['lighthouse-geth-1']['ethereum_node_fact_el_enode'] }}"
+  - "{{ hostvars['prysm-geth-1']['ethereum_node_fact_el_enode'] }}"
+  #- "{{ hostvars['lighthouse-nethermind-1']['ethereum_node_fact_el_enode'] }}"
+  - "{{ hostvars['nimbus-besu-1']['ethereum_node_fact_el_enode'] }}"
+  - "enode://292d8de2de3977c2a4c136a66e81da3896cea872a3b95451d4aa1737654e39dfea0ff1d060a0fba780d7bb7b16518202d0609a2756775bc633d0d5d95d5f6bb3@135.125.119.2:60303"
+
+ethereum_node_xatu_sentry_enabled: true
+
+# role: ethpandaops.general.prometheus
+prometheus_remote_push_url: https://victoriametrics-public.analytics.production.platform.ethpandaops.io/insert/1/prometheus
+
+prometheus_remote_write_username: "{{ secret_prometheus_remote_write.username }}"
+prometheus_remote_write_password: "{{ secret_prometheus_remote_write.password }}"
+prometheus_config: |
+  global:
+    scrape_interval: 30s
+    evaluation_interval: 30s
+    scrape_timeout: 10s
+    external_labels:
+      instance: "{{ inventory_hostname }}"
+      ip_address: "{{ ansible_host }}"
+      network: "{{ ethereum_network_name }}"
+      testnet: "{{ ethereum_network_name }}"
+      execution_client: "{{ ethereum_node_el }}"
+      consensus_client: "{{ ethereum_node_cl }}"
+  remote_write:
+    - queue_config:
+        batch_send_deadline: 5s
+        max_backoff: 500ms
+        max_samples_per_send: 500
+        min_backoff: 50ms
+        max_shards: 100
+      url: {{ prometheus_remote_push_url }}
+      remote_timeout: 10s
+      basic_auth:
+        username: {{ prometheus_remote_write_username }}
+        password: {{ prometheus_remote_write_password }}
+  scrape_configs:
+    - job_name: "prometheus"
+      metrics_path: "/metrics"
+      static_configs:
+        - targets: ["localhost:9090"]
+          labels:
+            instance: "{{ inventory_hostname }}"
+    - job_name: "node"
+      metrics_path: "/metrics"
+      static_configs:
+        - targets: ["172.17.0.1:9100"]
+          labels:
+            instance: "{{ inventory_hostname }}"
+    - job_name: "exporter"
+      metrics_path: "/metrics"
+      static_configs:
+        - targets: ["ethereum-metrics-exporter:9090"]
+          labels:
+            instance: "{{ inventory_hostname }}"
+    - job_name: "consensus_node"
+      metrics_path: "/metrics"
+      static_configs:
+        - targets: ["{{ vars[ethereum_node_cl + '_container_name'] }}:{{ ethereum_node_cl_ports_metrics }}"]
+          labels:
+            instance: "{{ inventory_hostname }}"
+    - job_name: "snooper"
+      scrape_interval: "1s"
+      static_configs:
+        - targets:
+            - "snooper-rpc:9090"
+            - "snooper-engine:9090"
+          labels:
+            instance: "{{ inventory_hostname }}"
+
+# use snooper with prometheus metrics
+ethereum_node_json_rpc_snooper_engine_container_env:
+  SNOOPER_METRICS_PORT: "9090"
+  SNOOPER_METRICS_BIND: "0.0.0.0"
+  SNOOPER_API_PORT: "8961"
+  SNOOPER_API_AUTH: "{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}"
+ethereum_node_json_rpc_snooper_engine_public_port: 8961
+
+ethereum_node_docker_watchtower_enabled: true
+ethereum_node_docker_watchtower_containers_list:
+  - execution
+  - beacon
+  - validator
+# TODO: Remove this container_image once there's a release > v1.13.1 (By default it will use latest)
+#      We're using latest-dev mainly due to https://github.com/nicholas-fedor/watchtower/pull/1182
+docker_watchtower_container_image: "ghcr.io/nicholas-fedor/watchtower:latest-dev"
+docker_watchtower_container_additional_args:
+  - --interval=120 # 2 minutes
+
+ethereum_node_grafana_alloy_enabled: true
+alloy_pyroscope_server_endpoint: "{{ secret_pyroscope.endpoint }}"
+alloy_pyroscope_server_user: "{{ secret_pyroscope.username }}"
+alloy_pyroscope_server_password: "{{ secret_pyroscope.password }}"
+ethereum_node_grafana_alloy_config_content: |
+  discovery.docker "local_containers" {
+    host = "unix:///var/run/docker.sock"
+
+    filter {
+      name = "name"
+      values = [
+        "execution",
+        "beacon",
+        "validator",
+      ]
+    }
+  }
+
+  pyroscope.ebpf "instance" {
+    forward_to = [pyroscope.write.endpoint.receiver]
+    targets = discovery.docker.local_containers.targets
+  }
+
+  pyroscope.write "endpoint" {
+    endpoint {
+      basic_auth {
+        password = "{{ alloy_pyroscope_server_password }}"
+        username = "{{ alloy_pyroscope_server_user }}"
+      }
+      url = "{{ alloy_pyroscope_server_endpoint }}"
+    }
+    external_labels = {
+      "instance" = "{{ inventory_hostname }}",
+      "ip_address" = "{{ ansible_host }}",
+      "network" = "{{ ethereum_network_name }}",
+      "testnet" = "{{ ethereum_network_name }}",
+      "execution_client" = "{{ ethereum_node_el }}",
+      "consensus_client" = "{{ ethereum_node_cl }}",
+    }
+  }
