@@ -12,7 +12,7 @@ default_ethereum_client_images:
   geth: docker.ethquokkaops.io/dh/ethpandaops/geth:master
   erigon: docker.ethquokkaops.io/dh/ethpandaops/erigon:performance
   ethereumjs: docker.ethquokkaops.io/dh/ethpandaops/ethereumjs:performance
-  nethermind: docker.ethquokkaops.io/dh/ethpandaops/nethermind:performance
+  nethermind: docker.ethquokkaops.io/dh/ethpandaops/nethermind:master
   reth: ghcr.io/paradigmxyz/reth:nightly
 
 default_tooling_images:
