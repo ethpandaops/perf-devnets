@@ -59,6 +59,8 @@ dora:
       value: "*"
     - name: FRONTEND_ENABLE_DAS_GUARDIAN_MASS_SCAN
       value: "true"
+    - name: EXECUTIONINDEXER_PARALLEL_BLOCKS
+      value: "10"
   postgresql:
     name: "dora-postgresql"
     fullnameOverride: "dora-postgresql"
