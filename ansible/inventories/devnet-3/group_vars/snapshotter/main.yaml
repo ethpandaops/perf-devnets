@@ -62,7 +62,7 @@ snapshotter_ssh_known_hosts: |
   # 206.189.58.47:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u7
   |1|sTvgP5DfZqB13MCH9gKo+wAVqHo=|J7YSWpXU7JIS2KUi75ccYaXgCCc= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPzbrWS87nYcT2RJDgagXzncqsQWk4FRv6UrxAIcr9OlRSY2l139A3oqK/BJvUdv1uK/SxVx3jbI2wXS1GCFN5w=
   # 206.189.58.47:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u7
-  
+
 
 snapshotter_config: |
   server:
@@ -81,7 +81,7 @@ snapshotter_config: |
       use_agent: false
     snapshots:
       check_interval_seconds: 1
-      block_interval: 23861500
+      block_interval: 24187200
       run_once: false
       s3:
         bucket_name: "ethpandaops-ethereum-node-snapshots"
@@ -146,36 +146,36 @@ snapshotter_config: |
         endpoints:
           beacon: http://localhost:5052
           execution: http://localhost:8545
-      - alias: "erigon"
-        host: "{{ hostvars[groups['erigon'][0]].ansible_host }}"
-        user: "devops"
-        port: 22
-        data_dir: /data/erigon
-        upload_prefix: {{ ethereum_network_name }}/erigon
-        metadata:
-          extra_args: "{{ hostvars[groups['erigon'][0]].erigon_container_command_extra_args | join(', ') }}"
-        docker_containers:
-          engine_snooper: snooper-engine
-          execution: execution
-          beacon: beacon
-        endpoints:
-          beacon: http://localhost:5052
-          execution: http://localhost:8545
-      - alias: "reth"
-        host: "{{ hostvars[groups['reth'][0]].ansible_host }}"
-        user: "devops"
-        port: 22
-        data_dir: /data/reth
-        upload_prefix: {{ ethereum_network_name }}/reth
-        metadata:
-          extra_args: "{{ hostvars[groups['reth'][0]].reth_container_command_extra_args | join(', ') }}"
-        docker_containers:
-          engine_snooper: snooper-engine
-          execution: execution
-          beacon: beacon
-        endpoints:
-          beacon: http://localhost:5052
-          execution: http://localhost:8545
+      #- alias: "erigon"
+      #  host: "{{ hostvars[groups['erigon'][0]].ansible_host }}"
+      #  user: "devops"
+      #  port: 22
+      #  data_dir: /data/erigon
+      #  upload_prefix: {{ ethereum_network_name }}/erigon
+      #  metadata:
+      #    extra_args: "{{ hostvars[groups['erigon'][0]].erigon_container_command_extra_args | join(', ') }}"
+      #  docker_containers:
+      #    engine_snooper: snooper-engine
+      #    execution: execution
+      #    beacon: beacon
+      #  endpoints:
+      #    beacon: http://localhost:5052
+      #    execution: http://localhost:8545
+      #- alias: "reth"
+      #  host: "{{ hostvars[groups['reth'][0]].ansible_host }}"
+      #  user: "devops"
+      #  port: 22
+      #  data_dir: /data/reth
+      #  upload_prefix: {{ ethereum_network_name }}/reth
+      #  metadata:
+      #    extra_args: "{{ hostvars[groups['reth'][0]].reth_container_command_extra_args | join(', ') }}"
+      #  docker_containers:
+      #    engine_snooper: snooper-engine
+      #    execution: execution
+      #    beacon: beacon
+      #  endpoints:
+      #    beacon: http://localhost:5052
+      #    execution: http://localhost:8545
 
 
 docker_nginx_proxy_container_custom_vhost_files:
