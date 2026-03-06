@@ -53,3 +53,26 @@ checkpointz:
         - name: rpc-prysm-geth-001
           address: http://prysm-geth-001:5052
           dataProvider: true
+        
+        - address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.bootnode-1.perf-devnet-3.ethpandaops.io
+          name: bootnode-1
+          dataProvider: true
+        - address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-geth-1.perf-devnet-3.ethpandaops.io
+          name: lighthouse-geth-1
+          dataProvider: true
+        - address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-nethermind-1.perf-devnet-3.ethpandaops.io
+          name: lighthouse-nethermind-1
+          dataProvider: true
+        - address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-reth-1.perf-devnet-3.ethpandaops.io
+          name: lighthouse-reth-1
+          dataProvider: true
+        - address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.nimbus-besu-1.perf-devnet-3.ethpandaops.io
+          name: nimbus-besu-1
+          dataProvider: true
+        - address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.prysm-geth-1.perf-devnet-3.ethpandaops.io
+          name: prysm-geth-1
+          dataProvider: true
+        - address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.teku-erigon-1.perf-devnet-3.ethpandaops.io
+          name: teku-erigon-1
+          dataProvider: true
+
