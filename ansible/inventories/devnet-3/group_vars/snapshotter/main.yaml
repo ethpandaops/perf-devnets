@@ -1,4 +1,4 @@
-snapshotter_container_image: ghcr.io/ethpandaops/snapshotter:master@sha256:aec61131bff6e89744da15ea381ce20d92eb028ad4543fc91b148732f6c13b1c
+snapshotter_container_image: ghcr.io/ethpandaops/snapshotter:master@sha256:8ec3875bc3c9e304c21785f581f233fdd968efa17d9b743141c44f8e1f3248d0
 
 snapshotter_container_env:
   S3_ENDPOINT_URL: "https://539bc53131934672bf85e7260ec0b218.r2.cloudflarestorage.com"
@@ -81,7 +81,7 @@ snapshotter_config: |
       use_agent: false
     snapshots:
       check_interval_seconds: 1
-      block_interval: 24187200
+      block_interval: 24194300
       run_once: false
       s3:
         bucket_name: "ethpandaops-ethereum-node-snapshots"
@@ -161,21 +161,21 @@ snapshotter_config: |
       #  endpoints:
       #    beacon: http://localhost:5052
       #    execution: http://localhost:8545
-      #- alias: "reth"
-      #  host: "{{ hostvars[groups['reth'][0]].ansible_host }}"
-      #  user: "devops"
-      #  port: 22
-      #  data_dir: /data/reth
-      #  upload_prefix: {{ ethereum_network_name }}/reth
-      #  metadata:
-      #    extra_args: "{{ hostvars[groups['reth'][0]].reth_container_command_extra_args | join(', ') }}"
-      #  docker_containers:
-      #    engine_snooper: snooper-engine
-      #    execution: execution
-      #    beacon: beacon
-      #  endpoints:
-      #    beacon: http://localhost:5052
-      #    execution: http://localhost:8545
+      - alias: "reth"
+        host: "{{ hostvars[groups['reth'][0]].ansible_host }}"
+        user: "devops"
+        port: 22
+        data_dir: /data/reth
+        upload_prefix: {{ ethereum_network_name }}/reth
+        metadata:
+          extra_args: "{{ hostvars[groups['reth'][0]].reth_container_command_extra_args | join(', ') }}"
+        docker_containers:
+          engine_snooper: snooper-engine
+          execution: execution
+          beacon: beacon
+        endpoints:
+          beacon: http://localhost:5052
+          execution: http://localhost:8545
 
 
 docker_nginx_proxy_container_custom_vhost_files:
