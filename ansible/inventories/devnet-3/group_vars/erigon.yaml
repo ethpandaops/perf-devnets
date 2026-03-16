@@ -34,6 +34,7 @@ erigon_container_command_extra_args:
   - --pprof.addr=0.0.0.0
   - --pprof.port=6060
   - --torrent.download.rate=1gb
+  - --batchSize=2048m
 #   - --ots.search.max.pagesize=50
 #   - --http.corsdomain=*
 #   - --http.api=eth,erigon,engine,web3,net,debug,trace,txpool,admin,ots
