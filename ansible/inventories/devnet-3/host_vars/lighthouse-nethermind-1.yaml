@@ -26,6 +26,7 @@ nethermind_container_command_extra_args:
   # Flat DB flags
   - --FlatDb.Enabled=true
   - --FlatDb.MaxReorgDepth=192
+  - --FlatDb.Layout=FlatInTrie
   #- --FlatDb.ImportFromPruningTrieState=true
   - --Metrics.EnableDetailedMetric=true
 
