@@ -39,8 +39,6 @@ dugtrio:
     name: rpc-prysm-geth-001
   - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.bootnode-1.perf-devnet-3.ethpandaops.io
     name: bootnode-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-geth-1.perf-devnet-3.ethpandaops.io
-    name: lighthouse-geth-1
   - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-nethermind-1.perf-devnet-3.ethpandaops.io
     name: lighthouse-nethermind-1
   - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-reth-1.perf-devnet-3.ethpandaops.io

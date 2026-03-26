@@ -82,11 +82,6 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.bootnode-1.perf-devnet-3.ethpandaops.io
             polling_interval: "12s"
-        - name: lighthouse-geth-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-geth-1.perf-devnet-3.ethpandaops.io
-            polling_interval: "12s"
         - name: lighthouse-nethermind-1
           type: "beacon_node"
           config:
