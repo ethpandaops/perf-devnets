@@ -78,6 +78,7 @@ jobs:
     # - ccx43: 16 cores, 64GB, 360GB disk
     runs-on:
         group: synctest
+        labels: Disk4TB
     #concurrency:
     #  group: >-
     #    ${{ matrix.network }}-${{ matrix.el-client }}-${{ matrix.cl-client }}
