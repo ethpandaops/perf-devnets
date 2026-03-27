@@ -81,7 +81,7 @@ snapshotter_config: |
       use_agent: false
     snapshots:
       check_interval_seconds: 1
-      block_interval: 24194300
+      block_interval: 24331400
       run_once: false
       s3:
         bucket_name: "ethpandaops-ethereum-node-snapshots"
@@ -102,7 +102,7 @@ snapshotter_config: |
   targets:
     ssh:
       - alias: "geth"
-        host: "{{ hostvars[groups['geth'][1]].ansible_host }}"
+        host: "{{ hostvars[groups['geth'][0]].ansible_host }}"
         user: "devops"
         port: 22
         data_dir: /data/geth/geth
