@@ -1,4 +1,4 @@
-name: Syncoor - Devnet 2
+name: Syncoor - Devnet 3
 
 on:
   #schedule:
@@ -25,11 +25,11 @@ on:
         required: false
         default: >-
           {
-            "geth": "ethpandaops/geth:performance",
+            "geth": "ethpandaops/geth:master",
             "besu": "ethpandaops/besu:performance",
-            "nethermind": "nethermindeth/nethermind:performance",
-            "erigon": "ethpandaops/erigon:performance",
-            "reth": "ethpandaops/reth:performance"
+            "nethermind": "nethermindeth/nethermind:master",
+            "erigon": "ethpandaops/erigon:performance-98a2ec5",
+            "reth": "ghcr.io/paradigmxyz/reth:nightly"
           }
         type: string
       cl-image:
@@ -84,7 +84,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        network: ["perf-devnet-2"]
+        network: ["perf-devnet-3"]
         el-client: >-
           ${{
             fromJSON(format('[{0}]', inputs.el-client || '
@@ -137,7 +137,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         git-ref: master
-        server: https://syncoor-api.perf-devnet-2.ethpandaops.io
+        server: https://syncoor-api.perf-devnet-3.ethpandaops.io
         server-auth: ${{ secrets.SYNCOOR_SERVER_AUTH }}
         log-force-colors: true
         public: true
@@ -153,7 +153,7 @@ jobs:
         el-env-vars: >-
           ${{
             (matrix.el-client == 'erigon') && '[
-              "SNAPS_GIT_BRANCH=perfnet2_shadow_fork_main"
+              "SNAPS_GIT_BRANCH=perfnet3_shadow_fork_main"
             ]' ||
             ''
           }}
