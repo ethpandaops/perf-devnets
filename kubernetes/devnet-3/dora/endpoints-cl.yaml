@@ -10,11 +10,6 @@
   name: bootnode-1
   authGroup: pandaops
   priority: -1
-- url: https://bn.lighthouse-geth-1.perf-devnet-3.ethpandaops.io
-  name: lighthouse-geth-1
-  authGroup: pandaops
-  priority: -1
-  archive: true
 - url: https://bn.lighthouse-nethermind-1.perf-devnet-3.ethpandaops.io
   name: lighthouse-nethermind-1
   authGroup: pandaops
@@ -37,4 +32,3 @@
   name: teku-erigon-1
   authGroup: pandaops
   priority: -1
-

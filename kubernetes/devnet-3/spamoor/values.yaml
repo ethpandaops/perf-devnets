@@ -39,7 +39,6 @@ spamoor:
   # Rpc
   - "http://geth-prysm-001:8545"
   - "group(bootnode-1)name(bootnode-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.bootnode-1.perf-devnet-3.ethpandaops.io"
-  - "group(lighthouse-geth-1)name(lighthouse-geth-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-geth-1.perf-devnet-3.ethpandaops.io"
   - "group(lighthouse-nethermind-1)name(lighthouse-nethermind-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-nethermind-1.perf-devnet-3.ethpandaops.io"
   - "group(lighthouse-reth-1)name(lighthouse-reth-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-reth-1.perf-devnet-3.ethpandaops.io"
   - "group(nimbus-besu-1)name(nimbus-besu-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.nimbus-besu-1.perf-devnet-3.ethpandaops.io"

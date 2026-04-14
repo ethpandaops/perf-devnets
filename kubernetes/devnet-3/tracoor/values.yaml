@@ -105,16 +105,6 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
-      - name: lighthouse-geth-1
-        ethereum:
-          overrideNetworkName: perf-devnet-3
-          beacon:
-            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@bn.lighthouse-geth-1.perf-devnet-3.ethpandaops.io
-          execution:
-            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.perf-devnets.node_ingress.combined}>@rpc.lighthouse-geth-1.perf-devnet-3.ethpandaops.io
-            traceDisableMemory: true
-            traceDisableStack: true
-            traceDisableStorage: true
       - name: lighthouse-nethermind-1
         ethereum:
           overrideNetworkName: perf-devnet-3
