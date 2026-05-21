@@ -219,6 +219,7 @@ vector_config: |
     type = "docker_logs"
     exclude_containers = [
       "{{ vector_container_name }}",
+      "otelcol",
       "ethereum-metrics-exporter",
       "nginx-proxy",
       "node_exporter",
@@ -234,7 +235,7 @@ vector_config: |
     labels.instance = "{{ inventory_hostname }}"
     labels.network = "{{ ethereum_network_name }}"
     labels.testnet = "{{ ethereum_network_name }}"
-    labels.ingress_user = "{{ secret_loki.username }}"
+    labels.ingress_user = "{{ ethereum_network_name }}"
     labels.container_name = "{{ '{{ container_name }}' }}"
   {%- if ethereum_node_el is defined +%}
     labels.ethereum_el = "{{ ethereum_node_el }}"
@@ -245,5 +246,71 @@ vector_config: |
     encoding.codec = "json"
     endpoint = "{{ secret_loki.endpoint }}"
     auth.strategy = "basic"
-    auth.user = "{{ secret_loki.username }}"
+    auth.user = "{{ ethereum_network_name }}"
     auth.password = "{{ secret_loki.password }}"
+
+# role: ethpandaops.general.otelcol_contrib
+otlp_endpoint: "https://otlp.analytics.production.platform.ethpandaops.io"
+otlp_deployment_env: production
+otelcol_contrib_container_networks: "{{ docker_networks_shared }}"
+otelcol_contrib_config: |
+  extensions:
+    basicauth/client:
+      client_auth:
+        username: {{ ethereum_network_name }}
+        password: {{ secret_loki.password }}
+
+  receivers:
+    filelog:
+      include: [/var/lib/docker/containers/*/*-json.log]
+      include_file_path: true
+      start_at: end
+      operators:
+        - type: container
+          format: docker
+          add_metadata_from_filepath: true
+        - type: filter
+          expr: '(attributes["container.name"] != nil and attributes["container.name"] matches "^(otelcol|ethereum-metrics-exporter|nginx-proxy|node_exporter|prometheus|snooper-.*)$") or body matches "github\\.com/open-telemetry/opentelemetry-collector-contrib|otelcol-contrib"'
+        - type: json_parser
+          if: 'body matches "^\\s*\\{"'
+          on_error: send
+          severity:
+            parse_from: attributes.level
+            overwrite_text: true
+            mapping:
+              fatal4: [emergency, emerg]
+              fatal3: [alert]
+              fatal2: [critical, crit]
+              fatal:  [panic]
+
+  processors:
+    resource:
+      attributes:
+        - {key: deployment.environment, value: "{{ otlp_deployment_env }}", action: upsert}
+        - {key: network,                value: "{{ ethereum_network_name }}", action: upsert}
+        - {key: ingress_user,           value: "{{ ethereum_network_name }}", action: upsert}
+        - {key: host.name,              value: "{{ inventory_hostname }}", action: upsert}
+
+    transform/service_name:
+      log_statements:
+        - context: resource
+          statements:
+            - set(attributes["service.name"], attributes["container.name"]) where attributes["container.name"] != nil
+
+    batch:
+      send_batch_size: 500
+      timeout: 5s
+
+  exporters:
+    otlphttp/staging:
+      endpoint: "{{ otlp_endpoint }}"
+      auth:
+        authenticator: basicauth/client
+
+  service:
+    extensions: [basicauth/client]
+    pipelines:
+      logs:
+        receivers: [filelog]
+        processors: [resource, transform/service_name, batch]
+        exporters: [otlphttp/staging]
