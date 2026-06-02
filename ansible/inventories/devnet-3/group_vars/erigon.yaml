@@ -19,7 +19,7 @@ erigon_container_env:
   LETSENCRYPT_HOST: "{{ ethereum_node_rcp_hostname }}"
   KV_READ_METRICS: "true"
 erigon_container_command_extra_args:
-  - --http.api=eth,erigon,engine,web3,net,debug,trace,txpool,admin
+  - --http.api=eth,erigon,engine,web3,net,debug,trace,txpool,admin,internal
   - --http.vhosts=*
   - --ws
   - --prune.mode=full
@@ -34,7 +34,7 @@ erigon_container_command_extra_args:
   - --pprof.addr=0.0.0.0
   - --pprof.port=6060
   - --torrent.download.rate=1gb
-  - --batchSize=1536m
+#   - --batchSize=1536m
 #   - --ots.search.max.pagesize=50
 #   - --http.corsdomain=*
 #   - --http.api=eth,erigon,engine,web3,net,debug,trace,txpool,admin,ots
