@@ -1,0 +1,5 @@
+# node_exporter runs on the host network. Listen only on the docker bridge
+# gateway, where this host's Prometheus scrapes it (172.17.0.1:9100), instead
+# of every interface including the public one.
+node_exporter_container_command_extra_args:
+  - --web.listen-address=172.17.0.1:9100
