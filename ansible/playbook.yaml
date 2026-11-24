@@ -33,6 +33,8 @@
       tags: [init-server, otelcol]
     - role: ethpandaops.general.vector
       tags: [init-server, vector]
+    - role: disable_rpcbind
+      tags: [init-server, disable_rpcbind]
 
 - hosts: hive
   become: true
