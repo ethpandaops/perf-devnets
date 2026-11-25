@@ -1,0 +1,15 @@
+# rpcbind (portmapper, port 111) ships enabled on Debian via nfs-common and listens on all
+# interfaces. Nothing on these hosts uses NFS/RPC, so stop and mask it.
+- name: Gather service facts
+  ansible.builtin.service_facts:
+
+- name: Stop and mask rpcbind
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+    masked: true
+  loop:
+    - rpcbind.socket
+    - rpcbind.service
+  when: "'rpcbind.service' in ansible_facts.services"
